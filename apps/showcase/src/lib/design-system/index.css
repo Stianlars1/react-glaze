@@ -1,0 +1,19 @@
+/**
+ * Larsen Utvikling design system - single entry point.
+ *
+ * Import this file once (the app's globals.css does it for you):
+ *
+ *   core.css    structural tokens (spacing, widths, radii, type, z-index)
+ *   theme.css   color tokens (light + dark, auto via prefers-color-scheme,
+ *               manual override via [data-theme]) + document defaults
+ *   motion.css  durations, curves and gesture tokens, plus the
+ *               reduced-motion contract
+ *   base.css    reset
+ */
+
+@layer liquid-glass;
+@import "./core.css";
+@import "./theme.css";
+@import "./motion.css";
+@import "./base.css";
+@import "./showcase.css";

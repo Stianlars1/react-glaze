@@ -1,0 +1,169 @@
+/**
+ * Welcome page styles. Color values are substituted at scaffold time with
+ * the real token expressions for the chosen palette preset and format
+ * (see DESIGN.md for the mapping) - structural values come from core.css.
+ */
+
+.page {
+  max-width: var(--width-content);
+  min-height: 100dvh;
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+/* Light/dark logo swap - follows OS, respects [data-theme] override */
+.logo-dark {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  .logo-light {
+    display: none;
+  }
+  .logo-dark {
+    display: block;
+  }
+}
+[data-theme="light"] .logo-light {
+  display: block;
+}
+[data-theme="light"] .logo-dark {
+  display: none;
+}
+[data-theme="dark"] .logo-light {
+  display: none;
+}
+[data-theme="dark"] .logo-dark {
+  display: block;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+h1 {
+  font-size: 2.25rem;
+  letter-spacing: var(--tracking-display);
+  margin-bottom: var(--space-3);
+}
+
+h2 {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-2);
+}
+
+.lead {
+  max-width: var(--width-prose);
+  font-size: 1.125rem;
+}
+
+.hint {
+  font-size: 0.875rem;
+  margin-bottom: var(--space-4);
+}
+
+code {
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  background: hsl(var(--muted));
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.35em;
+}
+
+.tokens {
+  display: flex;
+  flex-direction: column;
+}
+
+.tokens h2 + .hint {
+  margin-top: 0;
+}
+
+.tokens h2:not(:first-child) {
+  margin-top: var(--space-6);
+}
+
+.spacing-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.spacing-bar {
+  height: var(--space-2);
+  background: hsl(var(--accent-9));
+  border-radius: var(--radius-full);
+  transition: width var(--duration-ui) var(--ease-out);
+}
+
+.swatches {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: var(--space-3);
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border: var(--border-width) solid hsl(var(--border));
+  border-radius: var(--radius-md);
+}
+
+.swatch-chip {
+  height: var(--space-6);
+  border: var(--border-width) solid hsl(var(--border));
+  border-radius: var(--radius-sm);
+}
+
+.swatch-label {
+  font-size: 0.875rem;
+  margin-top: var(--space-1);
+}
+
+.swatch-var {
+  font-size: 0.75rem;
+  background: none;
+  padding: 0;
+}
+
+.steps ol {
+  padding-left: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: var(--width-prose);
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: var(--space-6);
+  border-top: var(--border-width) solid hsl(var(--border));
+  font-size: 0.875rem;
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  gap: var(--space-2);
+  text-decoration-thickness: var(--border-width);
+  transition: scale var(--duration-press) var(--ease-out);
+}
+
+.footer-link:focus-visible {
+  outline: 2px solid hsl(var(--foreground));
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.footer-link:active {
+  scale: var(--press-scale);
+}

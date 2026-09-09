@@ -1,0 +1,59 @@
+/**
+ * core.css - structural design tokens
+ *
+ * Spacing, widths, radii, motion and layering. Color lives in theme.css.
+ * Edit freely - this file is the master for every app generated from the
+ * Larsen Utvikling template.
+ */
+
+:root {
+  /* Spacing - 8 steps, 4px base (values in rem, px in comments) */
+  --space-1: 0.25rem; /*  4px */
+  --space-2: 0.5rem; /*  8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.5rem; /* 24px */
+  --space-6: 2rem; /* 32px */
+  --space-7: 3rem; /* 48px */
+  --space-8: 4rem; /* 64px */
+
+  /* Max-widths */
+  --width-prose: 65ch;
+  --width-content: 48rem; /* 768px */
+  --width-wide: 80rem; /* 1280px */
+
+  /* Radius */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 1rem; /* 16px */
+  --radius-full: 9999px;
+
+  /* Border */
+  --border-width: 1px;
+
+  /* Type - unitless leading so it scales with font size */
+  --leading-heading: 1.1;
+  --leading-body: 1.5;
+  --leading-tight: 1.4; /* floor for anything wrapping to 3+ lines */
+  --tracking-display: -0.025em; /* large text reads too loose as it grows */
+  --tracking-label: 0.05em; /* small uppercase labels */
+  --tracking-body: 0;
+
+  /* Motion tokens live in motion.css */
+
+  /* Layering */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+}
+
+/*
+ * Breakpoints (reference only - media queries cannot read custom properties):
+ *
+ *   sm  480px   @media (min-width: 30rem)
+ *   md  768px   @media (min-width: 48rem)
+ *   lg  1024px  @media (min-width: 64rem)
+ *   xl  1280px  @media (min-width: 80rem)
+ */

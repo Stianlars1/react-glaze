@@ -1,0 +1,30 @@
+{
+  "name": "react-glaze-workspace",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "pack:local": "node scripts/pack-local.mjs",
+    "build": "npm run build -w react-glaze && npm run build -w react-glaze-playground",
+    "dev": "npm run build -w react-glaze && npm run dev -w react-glaze-playground",
+    "test": "npm run build -w react-glaze && node --test packages/react/tests/*.test.mjs && npm run test:types -w react-glaze",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "dev:showcase": "npm run build -w react-glaze && npm run dev -w showcase",
+    "build:showcase": "npm run build -w react-glaze && npm run build -w showcase",
+    "test:playground": "node --experimental-strip-types --test apps/playground/tests/*.test.mjs",
+    "check": "npm test && npm run test:playground && npm run typecheck && npm run build && npm run build:showcase"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "@types/three": "0.185.4",
+    "@typescript/native": "npm:typescript@7.0.2",
+    "typescript": "npm:@typescript/typescript6@6.0.2"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

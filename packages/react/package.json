@@ -1,0 +1,54 @@
+{
+  "name": "react-glaze",
+  "version": "0.0.0-alpha.1",
+  "type": "module",
+  "license": "MIT",
+  "description": "Liquid glass for React. A configurable wrapper with automatic background refraction and optional pointer-driven rim lighting.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "THIRD-PARTY-NOTICES.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test:types": "tsc -p tests/types/tsconfig.json",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "dependencies": {
+    "three": "0.185.1",
+    "html-to-image": "1.11.13"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stianlars1/react-glaze.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/Stianlars1/react-glaze#readme",
+  "bugs": {
+    "url": "https://github.com/Stianlars1/react-glaze/issues"
+  },
+  "keywords": [
+    "react",
+    "nextjs",
+    "liquid-glass",
+    "glass",
+    "refraction",
+    "webgl"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "alpha",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
