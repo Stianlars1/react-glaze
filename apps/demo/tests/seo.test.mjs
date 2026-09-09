@@ -8,9 +8,9 @@ test("route canonicals and the sitemap agree on the three query-free production 
   const routes = ["/", "/playground", "/showcase"];
   const urls = routes.map((route) => pageMetadata(route).alternates.canonical);
   assert.deepEqual(urls, [
-    "https://react-glaze.vercel.app",
-    "https://react-glaze.vercel.app/playground",
-    "https://react-glaze.vercel.app/showcase",
+    "https://react-glaze.app",
+    "https://react-glaze.app/playground",
+    "https://react-glaze.app/showcase",
   ]);
   assert.deepEqual(sitemap().map(({ url }) => url), urls);
   for (const route of routes) {
@@ -30,10 +30,10 @@ test("child metadata preserves native file image URLs, dimensions and alt text f
   assert.equal(Object.hasOwn(pageMetadata("/").twitter, "images"), false);
   const parent = {
     openGraph: {
-      images: [{ url: "https://react-glaze.vercel.app/opengraph-image.png?build-hash", width: 1200, height: 630, alt: "React Glaze" }],
+      images: [{ url: "https://react-glaze.app/opengraph-image.png?build-hash", width: 1200, height: 630, alt: "React Glaze" }],
     },
     twitter: {
-      images: [{ url: "https://react-glaze.vercel.app/twitter-image.png?build-hash", alt: "React Glaze" }],
+      images: [{ url: "https://react-glaze.app/twitter-image.png?build-hash", alt: "React Glaze" }],
     },
   };
   for (const route of ["/playground", "/showcase"]) {
@@ -55,6 +55,6 @@ test("project structured data identifies its public source and icon without inve
   assert.equal(graph.find((node) => node["@type"] === "WebSite").alternateName, "react-glaze");
   const source = graph.find((node) => node["@type"] === "SoftwareSourceCode");
   assert.equal(source.codeRepository, "https://github.com/Stianlars1/react-glaze");
-  assert.equal(source.image, "https://react-glaze.vercel.app/brand/icon-512.png");
+  assert.equal(source.image, "https://react-glaze.app/brand/icon-512.png");
   assert.doesNotMatch(JSON.stringify(siteStructuredData), /"(?:aggregateRating|review|ratingValue|reviewCount|offers)"/);
 });

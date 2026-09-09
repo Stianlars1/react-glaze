@@ -1,6 +1,6 @@
-[![React Glaze - Liquid glass for React](apps/demo/public/brand/readme-banner.png)](https://react-glaze.vercel.app/)
+[![React Glaze - Liquid glass for React](apps/demo/public/brand/readme-banner.png)](https://react-glaze.app/)
 
-[Website](https://react-glaze.vercel.app/) · [Playground](https://react-glaze.vercel.app/playground) · [Showcase](https://react-glaze.vercel.app/showcase) · [npm](https://www.npmjs.com/package/react-glaze)
+[Website](https://react-glaze.app/) · [Playground](https://react-glaze.app/playground) · [Showcase](https://react-glaze.app/showcase) · [npm](https://www.npmjs.com/package/react-glaze)
 
 A configurable React 19 component that refracts the page behind your content. Use a native button, link or ordinary wrapper, keep your own CSS, and adjust the material, shape and optional pointer-driven rim light.
 
