@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { MaterialStage } from "@/components/landing/MaterialStage";
 import { InstallCommand } from "@/components/landing/InstallCommand";
-import { BrandMark } from "@/components/brand/BrandMark";
+import { BrandIcon } from "@/components/brand/BrandIcon";
 import { pageMetadata } from "@/lib/seo";
 import { ResourceLink } from "@/components/analytics/ResourceLink";
 
@@ -25,7 +25,7 @@ export default async function Home({
     <div className="landing-shell">
       <header className="landing-header">
         <Link href="/" className="landing-brand" aria-label="React Glaze home">
-          <BrandMark className="brand-mark" />
+          <BrandIcon />
           <span>React Glaze</span>
         </Link>
         <ResourceLink destination="github" className="landing-github" href="https://github.com/Stianlars1/react-glaze">

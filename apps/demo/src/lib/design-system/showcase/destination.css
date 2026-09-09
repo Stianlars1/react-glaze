@@ -43,9 +43,9 @@
 .showcase-shell .navigation-glass::after {
   background: hsl(var(--showcase-photo-shade) / 0.65);
 }
-.showcase-shell .wordmark .brand-mark {
-  width: var(--space-6);
-  height: var(--space-6);
+.showcase-shell .wordmark .brand-icon {
+  width: calc(var(--space-5) + var(--space-4));
+  height: calc(var(--space-5) + var(--space-4));
   flex: none;
 }
 .showcase-shell .navigation-glass nav {

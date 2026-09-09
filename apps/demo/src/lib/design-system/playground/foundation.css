@@ -99,9 +99,9 @@
   color: inherit;
   text-decoration: none;
 }
-.playground-shell .app-header .brand-mark {
-  width: var(--space-5);
-  height: var(--space-5);
+.playground-shell .app-header .brand-icon {
+  width: calc(var(--space-5) + var(--space-4));
+  height: calc(var(--space-5) + var(--space-4));
   flex: none;
 }
 .playground-shell .app-header nav {

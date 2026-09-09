@@ -44,9 +44,9 @@
   font-weight: 500;
   letter-spacing: -.025em;
 }
-.landing-brand .brand-mark {
-  width: var(--space-5);
-  height: var(--space-5);
+.landing-brand .brand-icon {
+  width: calc(var(--space-5) + var(--space-4));
+  height: calc(var(--space-5) + var(--space-4));
   flex: none;
 }
 .landing-github {

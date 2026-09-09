@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- Preview uploaded and local background sources directly. */
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { BrandMark } from "@/components/brand/BrandMark";
+import { BrandIcon } from "@/components/brand/BrandIcon";
 import { trackDemoEvent } from "@/lib/analytics";
 import { LiquidGlass, PRESETS } from "react-glaze";
 import type { GlassMetrics } from "react-glaze";
@@ -165,7 +165,7 @@ export function App() {
       <header className="app-header">
         <h1>
           <Link href="/" aria-label="React Glaze home">
-            <BrandMark className="brand-mark" />
+            <BrandIcon />
             React Glaze
           </Link>
         </h1>

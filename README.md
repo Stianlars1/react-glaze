@@ -70,7 +70,7 @@ pnpm pack:local
 
 Checks cover package tests and public types, playground configuration/storage tests, workspace type checks and the demo production build. Local archives are written to unique directories so previous builds remain available. See the [demo guide](apps/demo/README.md) for routes and styling, and the [design lock](docs/design-locks/2026-09-09-demo.md) for the landing direction and verification record.
 
-[Contributing](CONTRIBUTING.md) · [Release procedure](docs/releasing.md) · [Issues](https://github.com/Stianlars1/react-glaze/issues)
+[Contributing](CONTRIBUTING.md) · [Release procedure](docs/releasing.md) · [Brand assets](apps/demo/docs/brand.md) · [Issues](https://github.com/Stianlars1/react-glaze/issues)
 
 ## License and credits
 

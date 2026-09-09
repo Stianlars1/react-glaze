@@ -79,7 +79,7 @@
 }
 @media (min-width: 601px) and (max-width: 800px) {
   .showcase-shell .wordmark { font-size: var(--showcase-type-heading); }
-  .showcase-shell .wordmark .brand-mark { width: 24px; height: 24px; }
+  .showcase-shell .wordmark .brand-icon { width: var(--space-6); height: var(--space-6); }
   .showcase-shell .navigation-glass nav a { padding-inline: var(--space-3); white-space: nowrap; }
   .showcase-shell .navigation-glass nav .plan-nav { margin-inline-start: var(--space-1); }
 }
@@ -95,9 +95,9 @@
     font-size: var(--showcase-type-small);
     letter-spacing: var(--tracking-display);
   }
-  .showcase-shell .wordmark .brand-mark {
-    width: var(--space-5);
-    height: var(--space-5);
+  .showcase-shell .wordmark .brand-icon {
+    width: var(--space-6);
+    height: var(--space-6);
   }
   .showcase-shell .navigation-glass nav {
     gap: 0;
