@@ -39,8 +39,8 @@ importers:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
       react-glaze:
-        specifier: 0.1.0
-        version: 0.1.0(react@19.2.8)
+        specifier: 0.1.1
+        version: 0.1.1(react@19.2.8)
     devDependencies:
       '@types/node':
         specifier: ^20
@@ -1717,8 +1717,8 @@ packages:
     peerDependencies:
       react: ^19.2.8
 
-  react-glaze@0.1.0:
-    resolution: {integrity: sha512-WzVIVbk/Tu+q00G7PsSmpYUhD23uaMfDjFkqzzjB3JAi3y5TVnyUzGs4BcvcKWyAPB6ZZNvXpcrKVlWFJ5C+RQ==}
+  react-glaze@0.1.1:
+    resolution: {integrity: sha512-sKMP5ajCNJc+bv0MvosQeSfhh9scTx6WM57vQQ75lLewTgIrWb4AQ8yIGZpYkuKvRCFmrpuVagyMZ4PZy/33iQ==}
     peerDependencies:
       react: ^19.0.0
 
@@ -3719,7 +3719,7 @@ snapshots:
       react: 19.2.8
       scheduler: 0.27.0
 
-  react-glaze@0.1.0(react@19.2.8):
+  react-glaze@0.1.1(react@19.2.8):
     dependencies:
       html-to-image: 1.11.13
       react: 19.2.8
