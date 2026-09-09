@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { BrandMark } from "@/components/brand/BrandMark";
+import { trackDemoEvent } from "@/lib/analytics";
 import { LiquidGlass, PRESETS } from "react-glaze";
 import type { GlassMetrics } from "react-glaze";
 import {
@@ -128,18 +129,25 @@ export function App() {
           2,
         );
   const copy = async () => {
+    let succeeded = false;
     try {
       await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
+      succeeded = true;
     } catch {
       const textarea = document.createElement("textarea");
       textarea.value = code;
       document.body.append(textarea);
       textarea.select();
-      const copied = document.execCommand("copy");
+      succeeded = document.execCommand("copy");
       textarea.remove();
-      setCopied(copied);
+    }
+    setCopied(succeeded);
+    if (succeeded) {
+      trackDemoEvent({
+        name: "playground_code_copied",
+        properties: { format: codeTab },
+      });
+      setTimeout(() => setCopied(false), 1800);
     }
   };
   const shuffle = () => {

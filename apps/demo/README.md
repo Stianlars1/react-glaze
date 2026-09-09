@@ -37,6 +37,8 @@ The playground and showcase retain their visual identity in scoped route styles.
 
 ## Verify
 
+Production traffic and adoption actions use Vercel Web Analytics. See the [event definitions, collection boundaries and dashboard](docs/analytics.md).
+
 Run `pnpm check` at the root for package/config/storage tests, type checks and the production build. Use `pnpm --filter demo build` to build only the site, and `pnpm --filter demo start` to preview that production build.
 
 Desktop Chrome, Firefox and Safari are the package targets; iPhone Safari remains experimental. Local builds, browser checks, physical-device checks and deployment are separate evidence. No npm release or site deployment is triggered by these commands.

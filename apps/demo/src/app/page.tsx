@@ -4,6 +4,7 @@ import { MaterialStage } from "@/components/landing/MaterialStage";
 import { InstallCommand } from "@/components/landing/InstallCommand";
 import { BrandMark } from "@/components/brand/BrandMark";
 import { pageMetadata } from "@/lib/seo";
+import { ResourceLink } from "@/components/analytics/ResourceLink";
 
 export const metadata = pageMetadata("/");
 
@@ -27,9 +28,9 @@ export default async function Home({
           <BrandMark className="brand-mark" />
           <span>React Glaze</span>
         </Link>
-        <a className="landing-github" href="https://github.com/Stianlars1/react-glaze">
+        <ResourceLink destination="github" className="landing-github" href="https://github.com/Stianlars1/react-glaze">
           GitHub
-        </a>
+        </ResourceLink>
       </header>
 
       <main className="landing-main">
@@ -66,7 +67,7 @@ export default async function Home({
           <span>React 19</span><span aria-hidden="true">/</span>
           <a href="https://github.com/Stianlars1/react-glaze/blob/main/LICENSE">MIT licensed</a>
           <span aria-hidden="true">/</span>
-          <a href="https://github.com/Stianlars1/react-glaze#readme">Documentation</a>
+          <ResourceLink destination="documentation" href="https://github.com/Stianlars1/react-glaze#readme">Documentation</ResourceLink>
         </div>
       </footer>
     </div>

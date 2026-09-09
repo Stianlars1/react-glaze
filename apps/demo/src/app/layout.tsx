@@ -1,4 +1,5 @@
 import { serializeJsonLd, siteMetadata, siteStructuredData } from "@/lib/seo";
+import { DemoAnalytics } from "@/components/analytics/DemoAnalytics";
 import "./globals.css";
 
 export const metadata = siteMetadata;
@@ -16,6 +17,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteStructuredData) }}
         />
         {children}
+        <DemoAnalytics />
       </body>
     </html>
   );

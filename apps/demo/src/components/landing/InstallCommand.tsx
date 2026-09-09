@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { trackDemoEvent } from "@/lib/analytics";
 
 const command = "npm install react-glaze";
 
@@ -23,6 +24,7 @@ export function InstallCommand() {
     setStatus("copying");
     try {
       await navigator.clipboard.writeText(command);
+      trackDemoEvent({ name: "install_command_copied" });
       if (!active.current) return;
       setStatus("copied");
       resetTimer.current = setTimeout(() => setStatus("idle"), 2200);
