@@ -1,6 +1,6 @@
 {
   "name": "react-glaze",
-  "version": "0.0.0-alpha.1",
+  "version": "0.1.0",
   "type": "module",
   "license": "MIT",
   "description": "Liquid glass for React. A configurable wrapper with automatic background refraction and optional pointer-driven rim lighting.",
@@ -20,7 +20,7 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test:types": "tsc -p tests/types/tsconfig.json",
-    "prepack": "npm run build"
+    "prepack": "pnpm run build"
   },
   "peerDependencies": {
     "react": "^19.0.0"
@@ -48,7 +48,11 @@
   ],
   "publishConfig": {
     "access": "public",
-    "tag": "alpha",
+    "tag": "latest",
     "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   }
 }

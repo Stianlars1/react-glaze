@@ -1,0 +1,194 @@
+.playground-shell .inspector {
+  background: var(--playground-panel);
+  border: 1px solid var(--playground-line);
+  border-radius: 10px;
+  position: sticky;
+  top: 16px;
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #45553a transparent;
+}
+.playground-shell .inspector-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid var(--playground-line);
+}
+.playground-shell .inspector h2 {
+  font-size: 16px;
+  font-weight: 550;
+  color: var(--playground-accent);
+}
+.playground-shell .small-label {
+  font: 9px ui-monospace,
+    SFMono-Regular,
+    monospace;
+  letter-spacing: 0.15em;
+  color: #839576;
+}
+.playground-shell .preset-control {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--playground-line);
+}
+.playground-shell .preset-control > label {
+  display: block;
+  font-size: 12px;
+  color: var(--playground-muted);
+  margin-bottom: 8px;
+}
+.playground-shell .preset-control > div {
+  display: flex;
+  gap: 8px;
+}
+.playground-shell .preset-control select {
+  flex: 1;
+  min-width: 0;
+}
+.playground-shell .preset-control button {
+  padding: 8px 12px;
+  color: var(--playground-accent);
+  font-size: 12px;
+}
+.playground-shell select {
+  background: #1d271e;
+  border: 1px solid var(--playground-line);
+  border-radius: 7px;
+  color: #e6eadf;
+  padding: 10px 11px;
+  min-height: 40px;
+  font-size: 13px;
+  max-width: 100%;
+}
+.playground-shell .control-section {
+  padding: 0 20px;
+}
+.playground-shell .slider-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 9px;
+  align-items: center;
+  padding: 20px 0 12px;
+  border-bottom: 1px solid #2b362b;
+  font-size: 13px;
+}
+.playground-shell .slider-row output {
+  font-variant-numeric: tabular-nums;
+  color: #dbe4d1;
+  font-size: 12px;
+}
+.playground-shell .slider-row input {
+  grid-column: 1/-1;
+  width: 100%;
+  height: 24px;
+  appearance: none;
+  background: transparent;
+  margin: 0;
+  cursor: ew-resize;
+}
+.playground-shell .slider-row input::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 3px;
+  background: #46513f;
+}
+.playground-shell .slider-row input::-webkit-slider-thumb {
+  appearance: none;
+  background: #d5e899;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-top: -5px;
+  box-shadow: 0 0 0 3px #283021;
+}
+.playground-shell .slider-row input::-moz-range-track {
+  height: 4px;
+  border-radius: 3px;
+  background: #46513f;
+}
+.playground-shell .slider-row input::-moz-range-thumb {
+  background: #d5e899;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 0;
+}
+.playground-shell .color-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px 0;
+  font-size: 13px;
+}
+.playground-shell .color-row > span:last-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.playground-shell .color-row output {
+  font: 11px ui-monospace,
+    monospace;
+}
+.playground-shell .color-row input {
+  height: 34px;
+  width: 40px;
+  border: 1px solid #56634b;
+  background: transparent;
+  border-radius: 6px;
+  padding: 3px;
+  cursor: pointer;
+}
+.playground-shell .select-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: space-between;
+  padding-top: 17px;
+  font-size: 12px;
+}
+.playground-shell .select-row select {
+  max-width: 195px;
+  min-width: 0;
+}
+.playground-shell .control-details {
+  border-top: 1px solid var(--playground-line);
+}
+.playground-shell .control-details summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 20px;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.playground-shell .control-details summary::after {
+  content: "+";
+  color: var(--playground-muted);
+  font-size: 20px;
+}
+.playground-shell .control-details[open] summary::after {
+  content: "-";
+}
+.playground-shell .control-details summary::-webkit-details-marker {
+  display: none;
+}
+.playground-shell .control-details[open] summary {
+  border-bottom: 1px solid #2b362b;
+}
+.playground-shell .control-note {
+  color: var(--playground-muted);
+  font-size: 11px;
+  line-height: 1.7;
+  margin: 17px 0 20px;
+}
+.playground-shell .control-details .select-row {
+  align-items: start;
+  flex-direction: column;
+  gap: 7px;
+}
+.playground-shell .control-details .select-row select {
+  max-width: none;
+  width: 100%;
+}

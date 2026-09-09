@@ -5,17 +5,19 @@ import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-execFileSync("npm", ["run", "build", "-w", "react-glaze"], {
+execFileSync("pnpm", ["--filter", "react-glaze", "build"], {
   cwd: root,
   stdio: "inherit",
 });
 const parent = join(root, "work/package-packs");
 mkdirSync(parent, { recursive: true });
 const output = mkdtempSync(join(parent, `${new Date().toISOString().replaceAll(":", "-")}-`));
-const [pack] = JSON.parse(execFileSync("npm", [
-  "pack", "-w", "react-glaze", "--json", "--pack-destination", output,
+// The explicit build above keeps lifecycle output separate from the JSON manifest.
+const pack = JSON.parse(execFileSync("pnpm", [
+  "--dir", "packages/react", "--config.ignore-scripts=true",
+  "pack", "--json", "--pack-destination", output,
 ], { cwd: root, encoding: "utf8" }));
-const archive = join(output, pack.filename);
+const archive = resolve(output, pack.filename);
 const unexpected = pack.files.filter(({ path }) =>
   !path.startsWith("dist/") && !["package.json", "README.md", "LICENSE", "THIRD-PARTY-NOTICES.md"].includes(path),
 );

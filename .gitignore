@@ -6,7 +6,8 @@
 !/LICENSE
 !/CONTRIBUTING.md
 !/package.json
-!/package-lock.json
+!/pnpm-lock.yaml
+!/pnpm-workspace.yaml
 !/packages/
 !/apps/
 !/scripts/
@@ -14,13 +15,15 @@
 /docs/*
 !/docs/adoption.md
 !/docs/releasing.md
+!/docs/design-locks/
+/docs/design-locks/*
+!/docs/design-locks/2026-09-09-demo.md
 /scripts/*
 !/scripts/pack-local.mjs
 /packages/*
 !/packages/react/
 /apps/*
-!/apps/playground/
-!/apps/showcase/
+!/apps/demo/
 node_modules/
 dist/
 .next/

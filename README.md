@@ -4,12 +4,12 @@ Liquid glass for React.
 
 A configurable React 19 component that refracts the page behind your content. Use a native button, link or ordinary wrapper, keep your own CSS, and adjust the material, shape and optional pointer-driven rim light.
 
-**Experimental alpha.** Desktop Chrome, Firefox and Safari are the targets; iPhone Safari is experimental. Background capture is asynchronous and has [documented limitations](packages/react/README.md#known-alpha-limits).
+**Experimental.** Desktop Chrome, Firefox and Safari are the targets; iPhone Safari is experimental. Background capture is asynchronous and has [documented limitations](packages/react/README.md#known-limits).
 
 ## Install
 
 ```sh
-npm install react-glaze@alpha
+npm install react-glaze
 ```
 
 ```tsx
@@ -49,33 +49,31 @@ No provider, background image prop or stylesheet import is required. Your conten
 Use Node.js 24 or newer:
 
 ```sh
-npm ci
-npm run dev
+pnpm install --frozen-lockfile
+pnpm dev
 ```
 
-Open http://127.0.0.1:8798. The playground includes material/rim controls, custom backgrounds, generated JSX/JSON and shareable URLs. Save one configuration locally for your next visit; explicit shared URLs take priority. Uploaded images stay in the current tab.
+Open http://127.0.0.1:8862. One Next.js app serves the landing page, `/playground` and `/showcase`.
 
-For the realistic Next.js showcase:
+The playground includes material/rim controls, custom backgrounds, generated JSX/JSON and shareable URLs. Save one configuration locally for your next visit; explicit shared URLs take priority. Uploaded images stay in the current tab. Saved configurations belong to the browser origin; using the same host and port as the previous preview preserves access to them.
 
-```sh
-npm run dev:showcase
-```
-
-Open http://127.0.0.1:8801/showcase. It exercises image changes, navigation, native dialogs and forms over real page content.
+The Roam showcase exercises responsive photographs, image changes, navigation, native dialogs and trip planning over real page content. Its saved trips stay local to your browser.
 
 ## Develop and verify
 
 ```sh
-npm run check
-npm run pack:local
+pnpm check
+pnpm pack:local
 ```
 
-`packages/react` contains the library. `apps/playground` and `apps/showcase` consume it through the workspace package. The checks cover package tests and public types, playground configuration/storage tests, workspace type checks and both app builds. Local archives are written to unique directories so previous builds remain available.
+`packages/react` contains the library. `apps/demo` is a Next.js consumer pinned to the published `react-glaze@0.0.0-alpha.1` package. Its import resolves to the registry package, while the local library is built and tested separately. The workspace uses one pnpm lockfile.
+
+Checks cover package tests and public types, playground configuration/storage tests, workspace type checks and the demo production build. Local archives are written to unique directories so previous builds remain available. See the [demo guide](apps/demo/README.md) for routes and styling, and the [design lock](docs/design-locks/2026-09-09-demo.md) for the landing direction and verification record.
 
 [Contributing](CONTRIBUTING.md) · [Release procedure](docs/releasing.md) · [Issues](https://github.com/Stianlars1/react-glaze/issues)
 
 ## License and credits
 
-[MIT](LICENSE), © Stian Larsen. The optical material and original Optical Type artwork derive from the MIT-licensed [Drawn To](https://github.com/Stianlars1/drawn-to) reference. [Third-party notices](packages/react/THIRD-PARTY-NOTICES.md) include Drawn To, Three.js and html-to-image. Fonts retain their OFL notices; showcase photographs retain [source credits](apps/showcase/ASSETS.md).
+[MIT](LICENSE), © Stian Larsen. The optical material and original Optical Type artwork derive from the MIT-licensed [Drawn To](https://github.com/Stianlars1/drawn-to) reference. [Third-party notices](packages/react/THIRD-PARTY-NOTICES.md) include Drawn To, Three.js and html-to-image. Fonts retain their OFL notices; showcase photographs retain [source credits](apps/demo/ASSETS.md).
 
 React Glaze is an independent project and is not affiliated with Apple or Raycast.

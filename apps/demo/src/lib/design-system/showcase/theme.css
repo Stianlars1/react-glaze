@@ -1,0 +1,33 @@
+/* Original Roam colors, isolated from the React Glaze palette. */
+.showcase-shell {
+  --showcase-background: 0 0% 98.0392%;
+  --showcase-foreground: 0 0% 3.9216%;
+  --showcase-foreground-subtle: 206.6667 4.1096% 42.9412%;
+  --showcase-primary: 212.0225 100% 65.098%;
+  --showcase-primary-foreground: 214.5133 100% 22.1569%;
+  --showcase-secondary: 214.2857 53.8462% 89.8039%;
+  --showcase-secondary-foreground: 214.5133 100% 22.1569%;
+  --showcase-muted: 220 4.918% 88.0392%;
+  --showcase-border: 205.7143 5.1852% 73.5294%;
+  --showcase-input: 210 4.065% 48.2353%;
+  --showcase-ring: 0 0% 3.9216%;
+  --showcase-accent-3: 214.2857 53.8462% 89.8039%;
+  --showcase-accent-9: 212.0225 100% 65.098%;
+}
+@media (prefers-color-scheme: dark) {
+  .showcase-shell {
+    --showcase-background: 0 0% 3.9216%;
+    --showcase-foreground: 0 0% 98.0392%;
+    --showcase-foreground-subtle: 214.2857 2.7888% 49.2157%;
+    --showcase-primary: 212.0225 100% 65.098%;
+    --showcase-primary-foreground: 211.5789 54.2857% 6.8627%;
+    --showcase-secondary: 211.6364 66.2651% 16.2745%;
+    --showcase-secondary-foreground: 211.6981 100% 89.6078%;
+    --showcase-muted: 220 4.3478% 13.5294%;
+    --showcase-border: 210 4.1667% 28.2353%;
+    --showcase-input: 210 3.6364% 43.1373%;
+    --showcase-ring: 0 0% 98.0392%;
+    --showcase-accent-3: 211.6364 66.2651% 16.2745%;
+    --showcase-accent-9: 212.0225 100% 65.098%;
+  }
+}

@@ -1,0 +1,126 @@
+@font-face {
+  font-family: "Roam Inter";
+  src: url("/fonts/inter-600.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+.showcase-shell {
+  --showcase-photo-ink: 0 0% 100%;
+  --showcase-photo-shade: 0 0% 0%;
+  --showcase-type-caption: 0.8125rem;
+  --showcase-type-small: 0.875rem;
+  --showcase-type-heading: 1.25rem;
+  --showcase-type-title: clamp(2rem, 3.1vw, 3rem);
+  --showcase-radius-feature: 1.5rem;
+  --showcase-page-gutter: clamp(1rem, 4vw, 4rem);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: hsl(var(--showcase-background));
+  color: hsl(var(--showcase-foreground));
+  min-height: 100dvh;
+  overflow: clip;
+}
+.showcase-shell::selection,
+.showcase-shell ::selection {
+  background: hsl(var(--showcase-accent-3));
+  color: hsl(var(--showcase-foreground));
+}
+.showcase-shell hr {
+  border-top-color: hsl(var(--showcase-border));
+}
+.showcase-shell button,
+.showcase-shell a,
+.showcase-shell input {
+  -webkit-tap-highlight-color: hsl(var(--showcase-accent-9) / 0.18);
+  touch-action: manipulation;
+}
+.showcase-shell button {
+  cursor: pointer;
+}
+.showcase-shell button:disabled {
+  cursor: default;
+}
+.showcase-shell svg {
+  flex: none;
+}
+.showcase-shell :focus-visible {
+  outline: 3px solid hsl(var(--showcase-ring));
+  outline-offset: 5px;
+}
+.showcase-shell [data-liquid-host] :focus-visible,
+.showcase-shell .on-photo:focus-visible {
+  outline-color: hsl(var(--showcase-photo-ink));
+}
+.showcase-shell .eyebrow {
+  font-size: var(--showcase-type-caption);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.showcase-shell .muted {
+  color: hsl(var(--showcase-foreground-subtle));
+}
+.showcase-shell .icon-button {
+  display: inline-grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--space-2);
+  border: 0;
+  background: none;
+  border-radius: var(--radius-full);
+}
+.showcase-shell .text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  font-weight: 500;
+  min-height: 44px;
+}
+.showcase-shell .text-link > svg {
+  margin-inline-start: var(--space-2);
+}
+.showcase-shell .primary-button,
+.showcase-shell .small-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  border: 0;
+  border-radius: var(--radius-full);
+  padding: var(--space-3) var(--space-5);
+  background: hsl(var(--showcase-primary));
+  color: hsl(var(--showcase-primary-foreground));
+  font-weight: 600;
+  text-decoration: none;
+}
+.showcase-shell .small-button {
+  min-height: 44px;
+  background: hsl(var(--showcase-secondary));
+  color: hsl(var(--showcase-secondary-foreground));
+  font-size: var(--showcase-type-small);
+}
+.showcase-shell .primary-button:disabled {
+  background: hsl(var(--showcase-muted));
+  color: hsl(var(--showcase-foreground-subtle));
+}
+.showcase-shell .text-button {
+  border: 0;
+  background: none;
+  padding: var(--space-3);
+  text-decoration: underline;
+}
+.showcase-shell .skip-link {
+  position: fixed;
+  inset-block-start: var(--space-2);
+  inset-inline-start: var(--space-2);
+  z-index: 999;
+  padding: var(--space-3);
+  background: hsl(var(--showcase-background));
+  transform: translateY(-200%);
+}
+.showcase-shell .skip-link:focus {
+  transform: none;
+}

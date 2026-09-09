@@ -1,11 +1,11 @@
 # Use LiquidGlass in another application
 
-React Glaze is a React 19 alpha licensed under MIT. The owner-selected product name is React Glaze and its npm package name is `react-glaze`. No background image prop, global provider or CSS import is required. The [package contract](../packages/react/README.md) documents the desktop Chrome/Firefox/Safari targets and experimental iPhone scope.
+React Glaze is an experimental React 19 library licensed under MIT. The owner-selected product name is React Glaze and its npm package name is `react-glaze`. No background image prop, global provider or CSS import is required. The [package contract](../packages/react/README.md) documents the desktop Chrome/Firefox/Safari targets and experimental iPhone scope.
 
 ## Install
 
 ```sh
-npm install react-glaze@alpha
+npm install react-glaze
 ```
 
 For a local build before publishing:
@@ -13,16 +13,16 @@ For a local build before publishing:
 From the Liquid workspace, run:
 
 ```sh
-npm run pack:local
+pnpm pack:local
 ```
 
 The command builds the package and prints a new archive path under `work/package-packs/`. Each run gets a separate directory. In your own React 19 or Next.js application:
 
 ```sh
-npm install /absolute/path/to/react-glaze-0.0.0-alpha.1.tgz
+npm install /absolute/path/to/react-glaze-0.1.0.tgz
 ```
 
-The installed library must be a real package directory, not a workspace symlink. Do not import from this workspace's source or copy its engine into the application. For a new archive with the same local alpha version, install its new absolute path and restart the consuming app.
+The installed library must be a real package directory, not a workspace symlink. Do not import from this workspace's source or copy its engine into the application. For a new archive with the same local version, install its new absolute path and restart the consuming app.
 
 ## Start with ordinary HTML and CSS
 
@@ -116,4 +116,4 @@ The tested showcase covers native page scrolling, fixed navigation, image change
 
 Video/canvas frames, foreign iframes, cross-origin images without CORS, complex masks/blending, nested scrolling, transformed ancestors, closed shadow DOM, CSSOM/WAAPI-only changes and recursive glass still need separate work. Changing bytes at an unchanged image URL is not automatically observable. Root selection occurs at mount; reparenting requires a remount.
 
-The runnable examples are the actual [showcase](../apps/showcase/README.md) and [playground](../README.md). Public publication and deployment are separate from successful local use.
+The runnable examples are the actual [showcase](../apps/demo/README.md) and [playground](../README.md). Public publication and deployment are separate from successful local use.

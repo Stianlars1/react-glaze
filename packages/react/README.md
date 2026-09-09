@@ -2,17 +2,17 @@
 
 Liquid glass for React.
 
-One configurable component for React 19 / Next.js, licensed under [MIT](LICENSE). This is an experimental alpha. The rounded surface is new; the optical lens, physical material values and studio lighting derive from the pinned Drawn To reference. See [third-party notices](THIRD-PARTY-NOTICES.md).
+One configurable component for React 19 / Next.js, licensed under [MIT](LICENSE). This is an experimental library. The rounded surface is new; the optical lens, physical material values and studio lighting derive from the pinned Drawn To reference. See [third-party notices](THIRD-PARTY-NOTICES.md).
 
 ## Install and wrap
 
-Install the alpha in a React 19 application:
+Install in a React 19 application:
 
 ```sh
-npm install react-glaze@alpha
+npm install react-glaze
 ```
 
-To create an archive from the source workspace, run `npm run pack:local` there. Each run prints a new absolute archive path and preserves earlier archives. When replacing a local archive with the same alpha version, install its new path and restart the consuming app. The installed package should be a real directory, not a workspace symlink.
+To create an archive from the source workspace, run `pnpm pack:local` there. Each run prints a new absolute archive path and preserves earlier archives. When replacing a local archive with the same version, install its new path and restart the consuming app. The installed package should be a real directory, not a workspace symlink.
 
 Import the public entrypoint below. No provider, background image prop or separate CSS import is required. This package exports ESM and TypeScript declarations; it has no CommonJS entrypoint.
 
@@ -36,7 +36,7 @@ In a Next.js App Router application, a server component can render `LiquidGlass`
 
 The default wrapper follows normal `div` flow. It adds no width, height, padding, flex alignment, typography or color reset. Its essential styles establish local stacking; a low-specificity stylesheet supplies default positioning and corners. Your ordinary CSS selectors and inline styles can override the shape defaults. `className` and `style` belong to the caller; `width` and `height` remain optional conveniences. Native buttons and links retain their browser styling unless you style them explicitly.
 
-The background is ordinary page HTML. The component chooses the nearest ancestor with an opaque background color, or `document.body`; callers do not provide an image/source prop. This alpha combines a DOM snapshot adapter based on pinned html-to-image 1.11.13 helpers with an automatic native-image path and a lazily imported Three.js renderer. Its owned clone adaptation preserves browser-selected responsive images. This does **not** establish arbitrary live-DOM compatibility.
+The background is ordinary page HTML. The component chooses the nearest ancestor with an opaque background color, or `document.body`; callers do not provide an image/source prop. The library combines a DOM snapshot adapter based on pinned html-to-image 1.11.13 helpers with an automatic native-image path and a lazily imported Three.js renderer. Its owned clone adaptation preserves browser-selected responsive images. This does **not** establish arbitrary live-DOM compatibility.
 
 ## Component contract
 
@@ -145,15 +145,15 @@ Enabled sharp glass hosts keep their layout boxes in the source clone but contri
 
 ## Compatibility
 
-The first alpha targets desktop Chrome, Firefox and Safari. iPhone Safari is experimental. Development checks cover Chrome 152, Firefox 155, Playwright WebKit 26.5 and a separate native Safari 26.4 smoke. The existing Next.js archive consumer was tested with Next.js 16.3.4 and React 19.2.8. Browser engines, Simulator, viewport emulation and physical devices are distinct checks; these are not minimum-version or pixel-parity guarantees.
+The library targets desktop Chrome, Firefox and Safari. iPhone Safari is experimental. Development checks cover Chrome 152, Firefox 155, Playwright WebKit 26.5 and a separate native Safari 26.4 smoke. The existing Next.js archive consumer was tested with Next.js 16.3.4 and React 19.2.8. Browser engines, Simulator, viewport emulation and physical devices are distinct checks; these are not minimum-version or pixel-parity guarantees.
 
 Physical iPhone 16 Pro Max / iOS 26 testing found the normal showcase usable with slight remaining navbar-background stutter. It does not establish quantitative FPS or acceptance of every optional effect.
 
-## Known alpha limits
+## Known limits
 
 Cross-origin images without CORS access, foreign iframes, canvas/video frames, closed shadow DOM, complex filters/masks/blending and nested scroll can be omitted or reconstructed incorrectly. Sibling glass surfaces are not recursively refracted. The root is selected at mount; reparenting needs a remount. Ancestor transforms, sticky/fixed arrangements and large documents need further work. Captures during animation are asynchronous and can lag; this is not an assurance of 60 fps. On detected capture/render failure the glass is hidden and original DOM remains.
 
-No physical iPhone/Android or Windows Edge support guarantee is made by this alpha. The package is MIT-licensed. Report reproducible issues at https://github.com/Stianlars1/react-glaze/issues, including browser/device, reproduction steps and the smallest useful example.
+No physical iPhone/Android or Windows Edge support guarantee is made by this version. The package is MIT-licensed. Report reproducible issues at https://github.com/Stianlars1/react-glaze/issues, including browser/device, reproduction steps and the smallest useful example.
 
 ## Shape examples
 
@@ -189,7 +189,7 @@ No physical iPhone/Android or Windows Edge support guarantee is made by this alp
 
 Material presets remain adjustable. `shape` is the outline convenience; `preset` is the material starting point. The playground retains the selected shape when changing material and provides **Match Optical Type** to restore the original material, lens, artwork and proportions together. Manually editing corners shows **Custom corners**. JSX/JSON export uses the same typed prop builder as the live preview and excludes locked radius/height props.
 
-Shape defaults ship as one deduplicated React 19 style resource; consumers do not need a separate stylesheet import. Class/style changes, ancestor theme classes, stylesheet text changes, resize and CSS radius transitions/animations refresh the contour. No idle polling or DOM measurement probe is added. Direct CSSOM insertRule mutations and JavaScript Web Animations started without a DOM/CSS animation event are not automatically tracked by this alpha. Geometry animation may allocate changing meshes; bounded memory is not a promise of arbitrary animation performance.
+Shape defaults ship as one deduplicated React 19 style resource; consumers do not need a separate stylesheet import. Class/style changes, ancestor theme classes, stylesheet text changes, resize and CSS radius transitions/animations refresh the contour. No idle polling or DOM measurement probe is added. Direct CSSOM insertRule mutations and JavaScript Web Animations started without a DOM/CSS animation event are not automatically tracked by this version. Geometry animation may allocate changing meshes; bounded memory is not a promise of arbitrary animation performance.
 
 The shape follow-up is covered by Node geometry/SSR tests, compile-time prop tests, rendered Chrome/WebKit contour comparisons and a freshly packed Next.js consumer. The earlier physical iPhone study predates these shape changes; it must not be presented as validation of the new per-corner geometry.
 

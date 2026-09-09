@@ -2,20 +2,16 @@
   "name": "react-glaze-workspace",
   "private": true,
   "type": "module",
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
   "scripts": {
     "pack:local": "node scripts/pack-local.mjs",
-    "build": "npm run build -w react-glaze && npm run build -w react-glaze-playground",
-    "dev": "npm run build -w react-glaze && npm run dev -w react-glaze-playground",
-    "test": "npm run build -w react-glaze && node --test packages/react/tests/*.test.mjs && npm run test:types -w react-glaze",
-    "typecheck": "npm run typecheck --workspaces --if-present",
-    "dev:showcase": "npm run build -w react-glaze && npm run dev -w showcase",
-    "build:showcase": "npm run build -w react-glaze && npm run build -w showcase",
-    "test:playground": "node --experimental-strip-types --test apps/playground/tests/*.test.mjs",
-    "check": "npm test && npm run test:playground && npm run typecheck && npm run build && npm run build:showcase"
+    "build": "pnpm --filter react-glaze build && pnpm --filter demo build",
+    "dev": "pnpm --filter demo dev",
+    "start": "pnpm --filter demo start",
+    "test": "pnpm --filter react-glaze build && node --test packages/react/tests/*.test.mjs && pnpm --filter react-glaze test:types",
+    "test:playground": "node --experimental-strip-types --test apps/demo/tests/*.test.mjs",
+    "typecheck": "pnpm --filter react-glaze --filter demo typecheck",
+    "lint": "pnpm --filter demo lint",
+    "check": "pnpm test && pnpm test:playground && pnpm typecheck && pnpm lint && pnpm build"
   },
   "devDependencies": {
     "@types/react": "19.2.18",
@@ -26,5 +22,6 @@
   },
   "engines": {
     "node": ">=24"
-  }
+  },
+  "packageManager": "pnpm@10.33.2"
 }

@@ -1,0 +1,68 @@
+/**
+ * motion.css - motion tokens
+ *
+ * Values follow the motion-craft skill from the Larsen Skills collection
+ * (https://github.com/Stianlars1/larsen-skills) and match larsenutvikling.no.
+ *
+ * Two rules the tokens encode: UI motion stays under 300ms, and reduced
+ * motion means gentler, not absent - see the bottom of this file.
+ */
+
+:root {
+  /* Curves - keep all four here so near-identical hand-typed beziers cannot drift */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* entrances, exits, direct response to input */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* travel between two on-screen poses */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1); /* sheets and drawers */
+  --ease-soft: cubic-bezier(0.2, 0, 0, 1); /* cross-fades; spring-like without a spring */
+
+  /* Durations - pick by what is moving, not by taste */
+  --duration-press: 140ms; /* :active feedback on buttons and controls */
+  --duration-fast: 160ms; /* hover, color and opacity changes, exits */
+  --duration-ui: 200ms; /* tooltips, dropdowns, menus */
+  --duration-slow: 240ms; /* modals, drawers, sheets */
+  --duration-enter: 300ms; /* entrances - pair with --duration-fast on exit */
+
+  /* Press feedback - the usable band is 0.95-0.98 */
+  --press-scale: 0.97; /* buttons and cards */
+  --press-scale-subtle: 0.985; /* large surfaces, where 0.97 reads as a jump */
+
+  /* Entrances - never animate from scale(0); nothing appears from nothing */
+  --enter-scale: 0.96; /* small elements; go closer to 1 the larger the element */
+  --enter-distance: 12px; /* translateY offset for content revealing in place */
+  --enter-blur: 4px; /* pairs with distance for a soft reveal; drop it on text-heavy blocks */
+
+  /* Stagger - delay between siblings in a sequence */
+  --stagger-item: 50ms; /* peer items: list rows, grid cards, chips */
+  --stagger-group: 100ms; /* semantic chunks: heading, then body, then actions */
+}
+
+/**
+ * Reduced motion targets vestibular triggers, not feedback: movement,
+ * parallax and autoplay go away, while opacity and color changes stay.
+ * Collapsing the distance and scale tokens does exactly that - transitions
+ * still run, they just no longer travel.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --enter-distance: 0px;
+    --enter-blur: 0px;
+    --enter-scale: 1;
+    --press-scale: 1;
+    --press-scale-subtle: 1;
+    --stagger-item: 0ms;
+    --stagger-group: 0ms;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  /*
+   * Continuous decoration has no gentler form - parallax, orbits, autoplaying
+   * loops. Mark those elements and they stop; spinners and progress
+   * indicators are left alone on purpose.
+   */
+  [data-motion="decorative"] {
+    animation: none !important;
+  }
+}

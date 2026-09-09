@@ -1,0 +1,120 @@
+.playground-shell {
+  min-height: 100dvh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: normal;
+  color: #e9eee6;
+  background: #101612;
+  font-synthesis: none;
+  color-scheme: dark;
+  --playground-accent: #cde598;
+  --playground-muted: #97a494;
+  --playground-line: #344032;
+  --playground-panel: #151d17;
+  --playground-raised: #222c21;
+}
+.playground-shell * {
+  box-sizing: border-box;
+}
+.playground-shell {
+  margin: 0;
+}
+.playground-shell button,
+.playground-shell input,
+.playground-shell select {
+  font: inherit;
+}
+.playground-shell button,
+.playground-shell a,
+.playground-shell input,
+.playground-shell select {
+  touch-action: manipulation;
+}
+.playground-shell button:where(:not([data-liquid-host])) {
+  cursor: pointer;
+  color: inherit;
+  background: var(--playground-raised);
+  border: 1px solid var(--playground-line);
+  border-radius: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+}
+.playground-shell button:where(:not([data-liquid-host])):hover {
+  border-color: #768768;
+}
+.playground-shell button:focus-visible,
+.playground-shell a:focus-visible,
+.playground-shell input:focus-visible,
+.playground-shell select:focus-visible,
+.playground-shell summary:focus-visible {
+  outline: 2px solid var(--playground-accent);
+  outline-offset: 4px;
+}
+.playground-shell button[aria-pressed="true"] {
+  background: #344128;
+  border-color: #748659;
+  color: #e0f3af;
+}
+.playground-shell a {
+  color: var(--playground-accent);
+  text-decoration: none;
+}
+.playground-shell a:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.playground-shell h1,
+.playground-shell h2,
+.playground-shell p {
+  margin: 0;
+}
+.playground-shell h1,
+.playground-shell h2 {
+  line-height: normal;
+  text-wrap: wrap;
+}
+.playground-shell .playground-loading {
+  padding: 28px;
+}
+.playground-shell .app-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--playground-line);
+}
+.playground-shell .app-header h1 {
+  font-size: 24px;
+  letter-spacing: -0.035em;
+  color: var(--playground-accent);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.playground-shell .app-header h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+.playground-shell .app-header nav {
+  height: 100%;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+.playground-shell .app-header nav a {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  color: #d7ded3;
+}
+.playground-shell .app-header nav a[aria-current] {
+  color: var(--playground-accent);
+  border-bottom: 2px solid var(--playground-accent);
+}
+.playground-shell .alpha {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--playground-accent);
+  white-space: nowrap;
+}

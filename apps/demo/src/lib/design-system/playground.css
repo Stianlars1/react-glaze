@@ -1,0 +1,5 @@
+/* The migrated playground keeps its own scoped material editing surface. */
+@import "./playground/foundation.css";
+@import "./playground/workspace.css";
+@import "./playground/controls.css";
+@import "./playground/responsive.css";
