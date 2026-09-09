@@ -68,6 +68,9 @@ export const siteMetadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   robots: { index: true, follow: true },
+  verification: {
+    google: "zbVq5PHYBf89Y-BqpKcn9MyRvkXZmdlXBKPftHBtSHo",
+  },
 };
 
 export const siteStructuredData = {
