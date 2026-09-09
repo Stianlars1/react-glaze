@@ -1,6 +1,6 @@
 import type { Metadata, ResolvedMetadata } from "next";
 
-export const SITE_URL = "https://react-glaze.vercel.app";
+export const SITE_URL = "https://react-glaze.app";
 export const SITE_NAME = "React Glaze";
 export const REPOSITORY_URL = "https://github.com/Stianlars1/react-glaze";
 export const PACKAGE_URL = "https://www.npmjs.com/package/react-glaze";

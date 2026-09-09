@@ -1,6 +1,6 @@
 {
   "name": "react-glaze",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "license": "MIT",
   "description": "Liquid glass for React. A configurable wrapper with automatic background refraction and optional pointer-driven rim lighting.",
@@ -34,7 +34,7 @@
     "url": "git+https://github.com/Stianlars1/react-glaze.git",
     "directory": "packages/react"
   },
-  "homepage": "https://react-glaze.vercel.app/",
+  "homepage": "https://react-glaze.app/",
   "bugs": {
     "url": "https://github.com/Stianlars1/react-glaze/issues"
   },

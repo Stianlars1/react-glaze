@@ -2,7 +2,7 @@
 
 The library is the `packages/react` workspace. The root and demo app stay private. Releases use ordinary numeric versions, such as `0.1.0` and `0.2.0`, and the npm `latest` dist-tag. Users install with `npm install react-glaze`.
 
-1. Update the package version and refresh the root lockfile when needed. Keep the demo pinned to an existing published version until the new release is available. Review the public README and compatibility limits. Check the packed metadata: `homepage` must point to `https://react-glaze.vercel.app/`, while `repository` and `bugs` point to GitHub. After publication, verify both the README banner and the Homepage link on npm.
+1. Update the package version and refresh the root lockfile when needed. Keep the demo pinned to an existing published version until the new release is available. Review the public README and compatibility limits. Check the packed metadata: `homepage` must point to `https://react-glaze.app/`, while `repository` and `bugs` point to GitHub. After publication, verify both the README banner and the Homepage link on npm.
 2. Run `pnpm install --frozen-lockfile` and `pnpm check` from a clean checkout.
 3. Run `pnpm pack:local`. Inspect its archive manifest and install that exact tarball in an independent React application. Check public import, SSR and the relevant browser behavior.
 4. Commit the reviewed source and wait for CI. Authenticate with npm locally; never commit a token.

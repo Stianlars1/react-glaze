@@ -1,6 +1,6 @@
-[![React Glaze - Liquid glass for React](https://react-glaze.vercel.app/brand/readme-banner.png)](https://react-glaze.vercel.app/)
+[![React Glaze - Liquid glass for React](https://react-glaze.app/brand/readme-banner.png)](https://react-glaze.app/)
 
-[Website](https://react-glaze.vercel.app/) · [Playground](https://react-glaze.vercel.app/playground) · [Showcase](https://react-glaze.vercel.app/showcase) · [npm](https://www.npmjs.com/package/react-glaze)
+[Website](https://react-glaze.app/) · [Playground](https://react-glaze.app/playground) · [Showcase](https://react-glaze.app/showcase) · [npm](https://www.npmjs.com/package/react-glaze)
 
 One configurable component for React 19 / Next.js, licensed under [MIT](LICENSE). This is an experimental library. The rounded surface is new; the optical lens, physical material values and studio lighting derive from the pinned Drawn To reference. See [third-party notices](THIRD-PARTY-NOTICES.md).
 
