@@ -44,10 +44,10 @@ export function Planner() {
           onError={recordGlassError}
           onMetrics={recordGlassMetrics("navigation")}
         >
-          <a className="wordmark" href="#top" aria-label="React Glaze, back to top">
+          <Link className="wordmark" href="/" aria-label="React Glaze home">
             <Icon name="compass" />
             React Glaze
-          </a>
+          </Link>
           <nav aria-label="Main navigation">
             <a
               href="#places"
