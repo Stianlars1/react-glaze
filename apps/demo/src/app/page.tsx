@@ -59,7 +59,9 @@ export default async function Home({
       </main>
 
       <footer className="landing-footer">
-        <span>An open-source project by Stian Larsen.</span>
+        <span>
+          An open-source project by <a href="https://www.stianlarsen.com/">Stian Larsen</a>.
+        </span>
         <div>
           <span>React 19</span><span aria-hidden="true">/</span>
           <a href="https://github.com/Stianlars1/react-glaze/blob/main/LICENSE">MIT licensed</a>
