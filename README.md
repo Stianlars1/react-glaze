@@ -66,7 +66,7 @@ pnpm check
 pnpm pack:local
 ```
 
-`packages/react` contains the library. `apps/demo` is a Next.js consumer pinned to the published `react-glaze@0.0.0-alpha.1` package. Its import resolves to the registry package, while the local library is built and tested separately. The workspace uses one pnpm lockfile.
+`packages/react` contains the library. `apps/demo` is a Next.js consumer pinned to the published `react-glaze@0.1.0` package. Its import resolves to the registry package, while the local library is built and tested separately. The workspace uses one pnpm lockfile.
 
 Checks cover package tests and public types, playground configuration/storage tests, workspace type checks and the demo production build. Local archives are written to unique directories so previous builds remain available. See the [demo guide](apps/demo/README.md) for routes and styling, and the [design lock](docs/design-locks/2026-09-09-demo.md) for the landing direction and verification record.
 
