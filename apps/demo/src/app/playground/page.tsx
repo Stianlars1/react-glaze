@@ -1,11 +1,10 @@
-import type { Metadata } from "next";
+import type { ResolvingMetadata } from "next";
 import { PlaygroundLoader } from "@/components/playground/PlaygroundLoader";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Playground | React Glaze",
-  description:
-    "Explore liquid glass materials, shape and lighting, then copy the React code for your configuration.",
-};
+export async function generateMetadata(_props: unknown, parent: ResolvingMetadata) {
+  return pageMetadata("/playground", await parent);
+}
 
 export default function PlaygroundPage() {
   return <PlaygroundLoader />;

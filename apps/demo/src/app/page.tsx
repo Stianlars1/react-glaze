@@ -2,6 +2,10 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { MaterialStage } from "@/components/landing/MaterialStage";
 import { InstallCommand } from "@/components/landing/InstallCommand";
+import { BrandMark } from "@/components/brand/BrandMark";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata("/");
 
 export default async function Home({
   searchParams,
@@ -20,6 +24,7 @@ export default async function Home({
     <div className="landing-shell">
       <header className="landing-header">
         <Link href="/" className="landing-brand" aria-label="React Glaze home">
+          <BrandMark className="brand-mark" />
           <span>React Glaze</span>
         </Link>
         <a className="landing-github" href="https://github.com/Stianlars1/react-glaze">

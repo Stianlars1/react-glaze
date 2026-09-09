@@ -11,13 +11,15 @@
     "test:playground": "node --experimental-strip-types --test apps/demo/tests/*.test.mjs",
     "typecheck": "pnpm --filter react-glaze --filter demo typecheck",
     "lint": "pnpm --filter demo lint",
-    "check": "pnpm test && pnpm test:playground && pnpm typecheck && pnpm lint && pnpm build"
+    "check": "pnpm test && pnpm test:playground && pnpm typecheck && pnpm lint && pnpm build",
+    "brand:generate": "node scripts/generate-brand.mjs"
   },
   "devDependencies": {
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.7",
     "@types/three": "0.185.4",
     "@typescript/native": "npm:typescript@7.0.2",
+    "sharp": "0.35.4",
     "typescript": "npm:@typescript/typescript6@6.0.2"
   },
   "engines": {

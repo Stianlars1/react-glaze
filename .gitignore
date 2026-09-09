@@ -20,6 +20,7 @@
 !/docs/design-locks/2026-09-09-demo.md
 /scripts/*
 !/scripts/pack-local.mjs
+!/scripts/generate-brand.mjs
 /packages/*
 !/packages/react/
 /apps/*

@@ -38,10 +38,16 @@
 .landing-brand {
   display: inline-flex;
   align-items: center;
+  gap: var(--space-2);
   min-height: 44px;
   font-size: .95rem;
   font-weight: 500;
   letter-spacing: -.025em;
+}
+.landing-brand .brand-mark {
+  width: var(--space-5);
+  height: var(--space-5);
+  flex: none;
 }
 .landing-github {
   display: inline-flex;

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { LiquidGlass } from "react-glaze";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { places, type Place } from "./places";
 import { useTrip } from "./trip-store";
 import { Icon } from "./icon";
@@ -45,7 +46,7 @@ export function Planner() {
           onMetrics={recordGlassMetrics("navigation")}
         >
           <Link className="wordmark" href="/" aria-label="React Glaze home">
-            <Icon name="compass" />
+            <BrandMark className="brand-mark" />
             React Glaze
           </Link>
           <nav aria-label="Main navigation">
@@ -172,9 +173,13 @@ export function Planner() {
         </div>
       </main>
       <footer className="showcase-footer">
-        <span className="footer-brand">
-          roam<span>A LiquidGlass experience</span>
-        </span>
+        <div className="footer-brand">
+          <Link className="footer-brand-link" href="/" aria-label="React Glaze home">
+            <BrandMark className="brand-mark" />
+            React Glaze
+          </Link>
+          <span>A React Glaze showcase</span>
+        </div>
         <span>Sample trip. Yours to make.</span>
         <Link href="/">
           Component home

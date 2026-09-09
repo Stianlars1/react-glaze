@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- Preview uploaded and local background sources directly. */
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { BrandMark } from "@/components/brand/BrandMark";
 import { LiquidGlass, PRESETS } from "react-glaze";
 import type { GlassMetrics } from "react-glaze";
 import {
@@ -155,7 +156,10 @@ export function App() {
     <div className="playground-shell">
       <header className="app-header">
         <h1>
-          <Link href="/" aria-label="React Glaze home">React Glaze</Link>
+          <Link href="/" aria-label="React Glaze home">
+            <BrandMark className="brand-mark" />
+            React Glaze
+          </Link>
         </h1>
         <nav aria-label="Main navigation">
           <a href="#playground" aria-current="page">

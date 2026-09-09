@@ -1,11 +1,7 @@
-import type { Metadata } from "next";
+import { serializeJsonLd, siteMetadata, siteStructuredData } from "@/lib/seo";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "React Glaze - Liquid glass for React",
-  description:
-    "Give your React interface a little glaze. Explore a configurable liquid glass wrapper, tune it in the playground, and see it in a working app.",
-};
+export const metadata = siteMetadata;
 
 export default function RootLayout({
   children,
@@ -14,7 +10,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteStructuredData) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

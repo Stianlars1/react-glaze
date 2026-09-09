@@ -29,20 +29,24 @@
   background: hsl(var(--showcase-photo-shade) / 0.44);
 }
 .showcase-shell .wordmark {
+  white-space: nowrap;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   gap: var(--space-2);
   font-size: 1.75rem;
   font-weight: 600;
   letter-spacing: -0.07em;
   text-decoration: none;
+  white-space: nowrap;
 }
 .showcase-shell .navigation-glass::after {
   background: hsl(var(--showcase-photo-shade) / 0.65);
 }
-.showcase-shell .wordmark svg {
-  width: 27px;
-  height: 27px;
+.showcase-shell .wordmark .brand-mark {
+  width: var(--space-6);
+  height: var(--space-6);
+  flex: none;
 }
 .showcase-shell .navigation-glass nav {
   display: flex;
