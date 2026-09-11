@@ -1,16 +1,18 @@
+import { GlassDetails } from "./GlassDetails";
+import { GlassButton } from "./GlassButton";
 import { ShapeControls } from "./ShapeControls";
 import { RimLightControls } from "./RimLightControls";
 import { Slider } from "./Slider";
-import { initialState } from "./config";
 import type { GlassSettings, GlassPreset } from "react-glaze";
 import type { StudioState } from "./config";
 
 interface Props {
   state: StudioState;
   onPreset: (preset: GlassPreset) => void;
+  onReset: () => void;
   setState: React.Dispatch<React.SetStateAction<StudioState>>;
 }
-export function Controls({ state, setState, onPreset }: Props) {
+export function Controls({ state, setState, onPreset, onReset }: Props) {
   const set = <K extends keyof GlassSettings>(
     key: K,
     value: GlassSettings[K],
@@ -37,9 +39,19 @@ export function Controls({ state, setState, onPreset }: Props) {
   return (
     <aside className="inspector" aria-label="Settings">
       <div className="inspector-title">
-        <h2>Settings</h2>
-        <span className="small-label">LIVE</span>
+        <h2>Tune the glass.</h2>
+        <GlassButton className="text-button" onClick={onReset}>
+          Reset
+        </GlassButton>
       </div>
+      <GlassButton className="landing-preset" shape="rounded" onClick={onReset}>
+        <span className="preset-pill-mark" aria-hidden="true" />
+        <span>
+          <strong>Landing pill</strong>
+          <small>The one from the homepage.</small>
+        </span>
+        <span className="preset-apply">Use preset</span>
+      </GlassButton>
       <div className="preset-control">
         <label htmlFor="preset">Material preset</label>
         <div>
@@ -54,11 +66,6 @@ export function Controls({ state, setState, onPreset }: Props) {
             <option value="quiet">Quiet</option>
             <option value="frosted">Frosted</option>
           </select>
-          <button
-            onClick={() => setState(initialState)}
-          >
-            Reset
-          </button>
         </div>
       </div>
       <div className="control-section">
@@ -76,7 +83,6 @@ export function Controls({ state, setState, onPreset }: Props) {
           </select>
         </div>
 
-        <ShapeControls state={state} setState={setState} />
         {slider("Thickness", "thickness", 0, 3, 0.01)}
         {slider("Refraction (IOR)", "ior", 1, 2.2, 0.01)}
         <label className="color-row" htmlFor="tint">
@@ -88,13 +94,21 @@ export function Controls({ state, setState, onPreset }: Props) {
               value={state.settings.attenuationColor}
               onChange={(e) => set("attenuationColor", e.target.value)}
             />
-            <output>{state.settings.attenuationColor.toUpperCase()}</output>
+            <output aria-hidden="true">
+              {state.settings.attenuationColor.toUpperCase()}
+            </output>
           </span>
         </label>
       </div>
-      <RimLightControls state={state} setState={setState} />
-      <details className="control-details">
-        <summary>Content and interaction</summary>
+      <GlassDetails className="control-details" title="Shape and size">
+        <div className="control-section">
+          <ShapeControls state={state} setState={setState} />
+        </div>
+      </GlassDetails>
+      <GlassDetails className="control-details" title="Rim light">
+        <RimLightControls state={state} setState={setState} />
+      </GlassDetails>
+      <GlassDetails className="control-details" title="Content and interaction">
         <div className="control-section">
           <div className="select-row">
             <label htmlFor="example">Example</label>
@@ -108,7 +122,8 @@ export function Controls({ state, setState, onPreset }: Props) {
                 }))
               }
             >
-              <option value="button">Button</option>
+              <option value="landing-pill">Landing pill</option>
+              <option value="button">Simple button</option>
               <option value="card">Mixed HTML</option>
               <option value="type">Typography</option>
               <option value="empty">Empty surface</option>
@@ -135,9 +150,8 @@ export function Controls({ state, setState, onPreset }: Props) {
             experimental; hit areas still follow the original DOM layout.
           </p>
         </div>
-      </details>
-      <details className="control-details">
-        <summary>Advanced material</summary>
+      </GlassDetails>
+      <GlassDetails className="control-details" title="Advanced material">
         <div className="control-section">
           <div className="select-row">
             <label htmlFor="optics">Refraction model</label>
@@ -177,7 +191,7 @@ export function Controls({ state, setState, onPreset }: Props) {
             model. Shape, proportions and background also affect the appearance.
           </p>
         </div>
-      </details>
+      </GlassDetails>
     </aside>
   );
 }

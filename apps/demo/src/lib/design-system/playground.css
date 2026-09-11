@@ -1,5 +1,7 @@
-/* The migrated playground keeps its own scoped material editing surface. */
+/* The material editor extends the landing with scoped, token-based controls. */
 @import "./playground/foundation.css";
 @import "./playground/workspace.css";
 @import "./playground/controls.css";
 @import "./playground/responsive.css";
+@import "./playground/glass-controls.css";
+@import "./playground/control-transitions.css";

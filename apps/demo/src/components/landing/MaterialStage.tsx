@@ -5,18 +5,22 @@ import type { SyntheticEvent } from "react";
 import Image from "next/image";
 import { LiquidGlass } from "react-glaze";
 import { useGlassDrag } from "@/hooks/useGlassDrag";
+import { materialScenes } from "@/lib/material-scenes";
+import { landingPill } from "@/lib/landing-pill";
+import { pillStyle } from "@/lib/design-system/pill-presentation";
+import { PillLabel } from "./PillLabel";
 
-const scenes = [
-  { id: "soft", label: "Soft forms", image: "/art/soft.png" },
-  { id: "metal", label: "Hard light", image: "/art/metal.png" },
-  { id: "garden", label: "Small world", image: "/art/garden.png" },
-] as const;
+const scenes = materialScenes;
 
 type SceneImage = { index: number; request: number };
-const imageSizes = "(max-width: 760px) calc(100vw - 32px), (max-width: 1280px) 58vw, 760px";
+const imageSizes =
+  "(max-width: 760px) calc(100vw - 32px), (max-width: 1280px) 58vw, 760px";
 
 export function MaterialStage() {
-  const [displayed, setDisplayed] = useState<SceneImage>({ index: 0, request: 0 });
+  const [displayed, setDisplayed] = useState<SceneImage>({
+    index: 0,
+    request: 0,
+  });
   const [pending, setPending] = useState<SceneImage | null>(null);
   const latestRequest = useRef(0);
   const [frosted, setFrosted] = useState(false);
@@ -35,7 +39,8 @@ export function MaterialStage() {
   const onGlassReady = useCallback(() => setGlassError(false), []);
   const onGlassError = useCallback(() => setGlassError(true), []);
   const chooseScene = (index: number) => {
-    if (pending?.index === index || (!pending && displayed.index === index)) return;
+    if (pending?.index === index || (!pending && displayed.index === index))
+      return;
     const request = ++latestRequest.current;
     setFailedScene(null);
     setPending(index === displayed.index ? null : { index, request });
@@ -71,7 +76,7 @@ export function MaterialStage() {
             <Image
               key={image.request}
               className="landing-art-image"
-              src={scenes[image.index].image}
+              src={scenes[image.index].src}
               alt=""
               fill
               sizes={imageSizes}
@@ -88,40 +93,22 @@ export function MaterialStage() {
           {...bindings}
           as="button"
           type="button"
-          className="landing-glass"
-          shape="pill"
-          width={280}
-          height="auto"
+          className="landing-glass demo-pill"
+          {...landingPill}
           preset={frosted ? "frosted" : "reference"}
-          lighting="responsive"
-          rimLight={{ mode: "pointer", onLeave: "hold" }}
-          contentMode="sharp"
-          maxDpr={2}
           aria-label="A different feeling. Toggle frosted glass"
           aria-pressed={frosted}
           aria-describedby={`${instructionId} ${materialId}`}
           data-dragging={dragging}
-          style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
+          style={{
+            ...pillStyle,
+            transform: `translate(${position.x}px, ${position.y}px)`,
+          }}
           onClick={() => setFrosted((value) => !value)}
           onReady={onGlassReady}
           onError={onGlassError}
         >
-          <span>A different feeling.</span>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M5 12h14m-5-5 5 5-5 5"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <PillLabel />
         </LiquidGlass>
       </div>
 
@@ -131,11 +118,19 @@ export function MaterialStage() {
           <span className="landing-keyboard-hint"> Alt + arrows to move.</span>
         </p>
         <span id={materialId} className="landing-material-status" role="status">
-          {pending ? "Loading scene..." : frosted ? "Frosted glass" : "Clear glass"}
+          {pending
+            ? "Loading scene..."
+            : frosted
+              ? "Frosted glass"
+              : "Clear glass"}
         </span>
       </div>
 
-      <div className="landing-scene-controls" role="group" aria-label="Choose a scene">
+      <div
+        className="landing-scene-controls"
+        role="group"
+        aria-label="Choose a scene"
+      >
         {scenes.map((option, index) => (
           <button
             key={option.id}
@@ -146,7 +141,7 @@ export function MaterialStage() {
             onClick={() => chooseScene(index)}
           >
             <span aria-hidden="true">0{index + 1}</span>
-            {option.label}
+            {option.name}
           </button>
         ))}
       </div>

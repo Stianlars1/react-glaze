@@ -1,75 +1,98 @@
 .playground-shell .workspace {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  align-items: start;
-  max-width: 1760px;
-  margin: auto;
-  padding: 16px;
-  gap: 18px;
+  max-width: calc(var(--width-wide) * 1.25);
+  margin-inline: auto;
 }
-.playground-shell .main-column {
-  min-width: 0;
+.playground-shell .workspace-intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding-block: var(--space-5) var(--space-6);
+}
+.playground-shell .workspace-intro h1 {
+  font-size: clamp(1.55rem, 2.3vw, 2.1rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+}
+.playground-shell .workspace-intro p {
+  margin-top: var(--space-3);
+  color: hsl(var(--muted-foreground));
+  font-size: 0.85rem;
+}
+.playground-shell .workspace-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex: none;
+  font-size: 0.8rem;
+}
+.playground-shell .workspace-actions > a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: var(--space-1);
+}
+.playground-shell .link-feedback {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-end: 0;
+  max-width: 26ch;
+  font-size: 0.7rem;
+  color: hsl(var(--muted-foreground));
+}
+.playground-shell .editor-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--playground-sidebar);
+  gap: var(--playground-gap);
+  align-items: start;
 }
 .playground-shell .preview-panel {
-  border: 1px solid var(--playground-line);
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--playground-panel);
+  min-width: 0;
+  position: sticky;
+  top: var(--space-5);
 }
 .playground-shell .preview-toolbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 24px;
-  padding: 16px 18px;
-  position: relative;
-  min-height: 76px;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
 }
 .playground-shell .segmented {
   display: flex;
-  gap: 4px;
-  padding: 4px;
-  border-radius: 10px;
-  background: #1c251d;
-  border: 1px solid var(--playground-line);
+  gap: var(--space-1);
 }
 .playground-shell .segmented button {
-  border-color: transparent;
-  background: transparent;
-  min-width: 132px;
-  min-height: 34px;
-  padding: 5px 16px;
-  font-size: 14px;
-}
-.playground-shell .segmented button[aria-pressed="true"] {
-  border-color: #596b3a;
-  background: #29351f;
-  color: #e2efa2;
+  font-size: 0.75rem;
+  padding-inline: var(--space-4);
 }
 .playground-shell .motion-toggle {
-  font-size: 12px;
-  color: var(--playground-muted);
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: var(--space-2);
+  color: hsl(var(--muted-foreground));
+  font-size: 0.7rem;
+  min-height: 44px;
 }
 .playground-shell .motion-toggle input {
-  accent-color: var(--playground-accent);
-  width: 15px;
-  height: 15px;
+  accent-color: hsl(var(--foreground));
+  width: var(--space-4);
+  height: var(--space-4);
+  margin: 0;
 }
 .playground-shell .preview {
-  height: clamp(400px, 48vw, 570px);
+  height: clamp(300px, calc(100svh - 410px), 700px);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #111a20;
+  background: hsl(var(--card));
+  border-radius: var(--playground-stage-radius);
   overflow: hidden;
   isolation: isolate;
-  margin: 0 14px;
-  border-radius: 9px;
-  color: white;
 }
 .playground-shell .wallpaper {
   position: absolute;
@@ -77,8 +100,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 53%;
   pointer-events: none;
   user-select: none;
+  -webkit-user-drag: none;
 }
 .playground-shell .preview[data-motion="true"] .wallpaper {
   animation: playground-wallpaper-pan 14s ease-in-out infinite alternate;
@@ -86,151 +111,331 @@
 .playground-shell .preview [data-liquid-host] {
   flex: none;
   text-align: center;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.playground-shell .preview [data-liquid-host]:not(.demo-pill) {
   line-height: 1.1;
-  text-shadow: 0 1px 12px #0007;
+  text-shadow: 0 1px 12px hsl(var(--playground-photo-shade) / 0.45);
 }
 .playground-shell .preview [data-liquid-host] p {
-  margin-top: 16px;
-  line-height: 1.5;
+  margin-top: var(--space-4);
+  line-height: var(--leading-body);
   font-weight: 400;
 }
-.playground-shell .preview [data-liquid-host]:focus-visible {
-  outline: 2px solid #effbc2;
-  outline-offset: 7px;
+.playground-shell .preview [data-dragging="true"] {
+  cursor: grabbing;
 }
-.playground-shell .wallpaper-tray {
-  padding: 16px;
+.playground-shell .preview [data-liquid-host]:focus-visible {
+  outline: none;
+}
+.playground-shell .glass-focus-ring {
+  position: absolute;
+  inset: calc(var(--space-2) * -1);
+  border: 2px solid hsl(var(--playground-photo-ink));
+  box-shadow: 0 0 0 1px hsl(var(--playground-photo-shade));
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+}
+.playground-shell
+  .preview
+  [data-liquid-host]:focus-visible
+  > .glass-focus-ring {
+  opacity: 1;
+}
+.playground-shell .drag-toolbar {
   display: flex;
-  gap: 16px;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-3);
+  padding-top: var(--space-1);
+  color: hsl(var(--muted-foreground));
+  font-size: 0.7rem;
 }
-.playground-shell .wallpaper-options {
-  display: flex;
-  gap: 12px;
-  min-width: 0;
-}
-.playground-shell .wallpaper-option {
+.playground-shell .drag-toolbar button {
   border: 0;
-  background: transparent !important;
-  color: #d9e1d2 !important;
-  padding: 0;
-  min-width: 0;
-  border-radius: 7px;
-  width: 150px;
-  max-width: 16vw;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
-  font-size: 12px;
+  padding-inline: var(--space-2);
+  font-size: 0.7rem;
 }
-.playground-shell .wallpaper-option img {
-  width: 100%;
-  height: 76px;
-  object-fit: cover;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  display: block;
+.playground-shell .keyboard-hint {
+  display: none;
 }
-.playground-shell .wallpaper-option[aria-pressed="true"] img {
-  border-color: #dfec89;
-}
-.playground-shell .wallpaper-option:hover img {
-  border-color: #8a9e73;
-}
-.playground-shell .shuffle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: var(--playground-accent);
-  min-width: 124px;
-  font-size: 14px;
+.playground-shell .preview-panel:focus-within .keyboard-hint {
+  display: inline;
 }
 .playground-shell .preview-status {
   display: flex;
-  gap: 15px;
   justify-content: space-between;
-  padding: 0 18px 16px;
-  color: var(--playground-muted);
-  font-size: 11px;
-  line-height: 1.6;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  color: hsl(var(--muted-foreground));
+  font-size: 0.65rem;
+}
+.playground-shell .scene-options {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.playground-shell .scene-options button {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding-inline: var(--space-2);
+  color: hsl(var(--muted-foreground));
+  font-size: 0.77rem;
+}
+.playground-shell .scene-options button > span {
+  font-variant-numeric: tabular-nums;
+}
+.playground-shell .scene-tools {
+  border-bottom: 1px solid hsl(var(--border) / 0.65);
+}
+.playground-shell .scene-tools summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  list-style: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+.playground-shell .scene-tools summary::-webkit-details-marker {
+  display: none;
+}
+.playground-shell .scene-tools summary > span {
+  margin-inline-start: auto;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.7rem;
+}
+.playground-shell .scene-tools summary::after {
+  content: "+";
+  margin-inline-start: auto;
+  color: hsl(var(--muted-foreground));
+}
+.playground-shell .scene-tools summary:has(> span)::after {
+  margin-inline-start: 0;
+}
+.playground-shell .scene-tools[open] summary::after {
+  content: "-";
+}
+.playground-shell .wallpaper-tray {
+  padding-block: var(--space-4);
+  display: grid;
+  gap: var(--space-4);
+}
+.playground-shell .wallpaper-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: var(--space-3);
+}
+.playground-shell .wallpaper-option {
+  min-width: 0;
+  display: grid;
+  gap: var(--space-2);
+  border-radius: var(--radius-md);
+  padding: var(--space-1);
+  font-size: 0.7rem;
+  text-align: start;
+}
+.playground-shell .wallpaper-option img,
+.playground-shell .optical-thumbnail {
+  width: 100%;
+  height: 72px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+.playground-shell .wallpaper-option > span:last-child {
+  padding-inline: var(--space-1);
+}
+.playground-shell .optical-thumbnail {
+  display: grid;
+  place-content: center;
+  color: hsl(var(--playground-optical-ink));
+  background: hsl(var(--playground-optical-paper));
+  font:
+    600 1.4rem/0.9 "Glaze Inter",
+    sans-serif;
+  letter-spacing: -0.04em;
+}
+.playground-shell .optical-backdrop {
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--playground-optical-paper));
+  pointer-events: none;
+}
+.playground-shell .preview[data-background="optical-type"] {
+  background: hsl(var(--playground-optical-paper));
+}
+.playground-shell
+  .preview[data-background="optical-type"]
+  [data-liquid-host]:not(.demo-pill) {
+  text-shadow: none;
+}
+.playground-shell .background-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+.playground-shell .background-actions button {
+  font-size: 0.75rem;
+}
+.playground-shell .background-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  font-size: 0.7rem;
+  color: hsl(var(--muted-foreground));
+}
+.playground-shell .background-note button {
+  flex: none;
+  font-size: 0.7rem;
+}
+.playground-shell .background-error {
+  font-size: 0.75rem;
+  color: hsl(var(--destructive));
+  padding-block: var(--space-3);
+}
+.playground-shell .reference-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-3) var(--space-4);
+}
+.playground-shell .reference-toolbar button {
+  flex: none;
+  font-size: 0.75rem;
+}
+.playground-shell .reference-toolbar span {
+  font-size: 0.7rem;
+  color: hsl(var(--muted-foreground));
+}
+.playground-shell .workspace-output {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--playground-sidebar);
+  gap: var(--playground-gap);
+  align-items: start;
+  margin-block: var(--space-7);
 }
 .playground-shell .code-panel {
-  margin-top: 16px;
-  border: 1px solid var(--playground-line);
-  border-radius: 10px;
-  background: var(--playground-panel);
+  min-width: 0;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  scroll-margin-block-start: var(--space-5);
 }
 .playground-shell .code-header {
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding: 11px 16px;
-  border-bottom: 1px solid var(--playground-line);
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid hsl(var(--border));
 }
 .playground-shell .code-header h2 {
-  font-size: 16px;
-  color: var(--playground-accent);
-  font-weight: 550;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
 }
 .playground-shell .code-tabs {
   display: flex;
-  gap: 4px;
-  margin-left: auto;
+  gap: var(--space-1);
+  margin-inline-start: auto;
 }
 .playground-shell .code-tabs button {
-  min-height: 30px;
-  padding: 4px 10px;
-  font: 11px ui-monospace,
-    SFMono-Regular,
+  padding-inline: var(--space-3);
+  border: 0;
+  font:
+    0.7rem "Glaze Mono",
     monospace;
-  background: transparent;
-  border-color: transparent;
-}
-.playground-shell .code-tabs button[aria-pressed="true"] {
-  background: var(--playground-raised);
-  color: var(--playground-accent);
 }
 .playground-shell .copy {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 12px;
-  min-height: 32px;
-  padding: 4px 12px;
-  color: var(--playground-accent);
+  font-size: 0.7rem;
 }
 .playground-shell pre {
   margin: 0;
-  padding: 20px;
-  max-height: 350px;
+  padding: var(--space-5);
+  max-height: 24rem;
   overflow: auto;
-  font: 12px/1.85 ui-monospace,
-    SFMono-Regular,
+  font:
+    0.72rem/1.85 "Glaze Mono",
     monospace;
+  color: hsl(var(--foreground) / 0.85);
+  background: hsl(var(--muted) / 0.45);
   tab-size: 2;
-  color: #c7d6cf;
 }
 .playground-shell code {
-  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-family: "Glaze Mono", monospace;
 }
-.playground-shell .code-note {
-  font-size: 11px;
-  color: var(--playground-muted);
-  padding: 12px 18px;
-  border-top: 1px solid var(--playground-line);
-  line-height: 1.6;
+.playground-shell .code-note,
+.playground-shell .copy-feedback {
+  padding: var(--space-3) var(--space-5);
+  font-size: 0.7rem;
+  color: hsl(var(--muted-foreground));
+}
+.playground-shell .copy-feedback:empty {
+  display: none;
+}
+.playground-shell .saved-config {
+  padding-block: var(--space-4);
+}
+.playground-shell .saved-config h2 {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--space-3);
+}
+.playground-shell .saved-config p {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.65;
+}
+.playground-shell .saved-config-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-block: var(--space-5) var(--space-3);
+}
+.playground-shell .saved-config-actions button {
+  font-size: 0.72rem;
+}
+.playground-shell .saved-config-actions button:first-child {
+  flex-basis: 100%;
+  text-align: start;
+}
+.playground-shell .saved-config .saved-config-status {
+  font-size: 0.7rem;
 }
 .playground-shell .workspace-footer {
-  padding: 18px 2px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  gap: 16px;
   flex-wrap: wrap;
-  font-size: 11px;
-  color: var(--playground-muted);
-  line-height: 1.6;
+  gap: var(--space-4);
+  padding-block: var(--space-5) var(--space-6);
+  max-width: calc(var(--width-wide) * 1.25);
+  margin-inline: auto;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.7rem;
+}
+.playground-shell .workspace-footer > div {
+  display: flex;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+.playground-shell .workspace-footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--space-6);
+}
+@keyframes playground-wallpaper-pan {
+  from {
+    transform: scale(1.08) translate(-1.5%, -1%);
+  }
+  to {
+    transform: scale(1.2) translate(2%, 1.5%);
+  }
 }

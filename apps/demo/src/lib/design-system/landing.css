@@ -169,29 +169,11 @@
 }
 .landing-art-image { object-fit: cover; object-position: 50% 53%; user-select: none; pointer-events: none; }
 .landing-glass {
-  z-index: 1;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-4);
-  min-height: 100px;
-  max-width: calc(100% - 48px);
-  padding: var(--space-5) var(--space-6);
-  border: 0;
-  background: transparent;
-  color: hsl(var(--landing-photo-ink));
-  font-family: "Glaze Inter", "Helvetica Neue", sans-serif;
-  font-weight: 600;
-  font-size: 1.25rem;
-  letter-spacing: -.04em;
-  text-shadow: 0 1px 6px hsl(var(--landing-photo-shade) / .45);
   touch-action: none;
   user-select: none;
   cursor: grab !important;
 }
 .landing-glass[data-dragging="true"] { cursor: grabbing !important; }
-.landing-glass svg { width: 20px; height: 20px; flex: none; }
 .landing-glass:focus-visible { outline-color: hsl(var(--landing-photo-ink)); }
 .landing-keyboard-hint { display: none; }
 .landing-stage:focus-within .landing-keyboard-hint { display: inline; }
@@ -270,7 +252,7 @@
   .install-command-button { padding: var(--space-2) var(--space-3); min-height: 44px; }
   .landing-art { min-height: 0; height: clamp(230px, 31svh, 310px); }
   .landing-art-image { object-position: 50% 59%; }
-  .landing-glass { min-height: 76px; font-size: 1.1rem; max-width: calc(100% - 64px); }
+  .demo-pill { --demo-pill-height: 76px; --demo-pill-font-size: 1.1rem; --demo-pill-max-width: calc(100% - 64px); }
   .landing-stage-caption { font-size: .6rem; min-height: 36px; align-items: start; }
   .landing-scene-button { font-size: .68rem; min-height: 44px; padding: var(--space-2); }
   .landing-footer { padding: var(--space-4) 0; min-height: 48px; font-size: .6rem; }

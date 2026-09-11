@@ -1,3 +1,13 @@
+import { materialScenes } from "../../lib/material-scenes.ts";
+import {
+  landingPill,
+  landingPillLabel,
+  landingPillArrow,
+} from "../../lib/landing-pill.ts";
+import {
+  pillStyle,
+  pillResponsiveCss,
+} from "../../lib/design-system/pill-presentation.ts";
 import type { CSSProperties } from "react";
 import {
   PRESETS,
@@ -21,20 +31,32 @@ export const exampleStyle = {
   padding: "16px 24px",
   background: "transparent",
   border: 0,
-  font: "inherit",
+  fontFamily: "inherit",
+  fontStyle: "inherit",
+  lineHeight: "inherit",
   color: "#fff",
   fontSize: 32,
   fontWeight: 600,
   maxWidth: "calc(100% - 64px)",
 } satisfies CSSProperties;
 
-export function getExampleStyle(background: BackgroundId) {
+export function getExampleStyle(
+  background: BackgroundId,
+  example: StudioState["example"] = "button",
+  height?: StudioDimension,
+) {
+  if (example === "landing-pill")
+    return {
+      ...pillStyle,
+      ...(typeof height === "number" ? { minHeight: 0 } : {}),
+    };
   return {
     ...exampleStyle,
     color: background === "optical-type" ? "#20231f" : "#fff",
   };
 }
 export const backgrounds = [
+  ...materialScenes,
   {
     id: "optical-type",
     name: "Optical Type",
@@ -79,26 +101,19 @@ export interface StudioState {
   background: BackgroundId;
   motion: boolean;
   referenceLayout: boolean;
-  example: "button" | "card" | "type" | "empty";
+  example: "landing-pill" | "button" | "card" | "type" | "empty";
 }
 export const initialState: StudioState = {
-  settings: {
-    enabled: true, shape: "pill", optics: "smooth", lighting: "responsive",
-    radius: 32, depth: 0.42, contentMode: "sharp", color: "#ffffff",
-    roughness: 0.345, transmission: 0.84, thickness: 0.52, ior: 1.27,
-    dispersion: 0.2, clearcoat: 0, clearcoatRoughness: 0.86,
-    attenuationColor: "#ffffff", attenuationDistance: 50,
-    envMapIntensity: 1.25, exposure: 1.25, shadowOpacity: 0.38, maxDpr: 2,
-  },
-  rimLight: { mode: "pointer", onLeave: "return", strength: 0.45, width: 2, reach: 100, response: 0.16 },
-  preset: "frosted",
+  settings: normalizeGlassSettings(landingPill),
+  rimLight: normalizeRimLight(landingPill.rimLight) ?? false,
+  preset: landingPill.preset,
   customShape: false,
-  width: "fit-content",
-  height: "fit-content",
-  background: "optical-type",
+  width: landingPill.width,
+  height: landingPill.height,
+  background: materialScenes[0].id,
   motion: false,
   referenceLayout: false,
-  example: "button",
+  example: "landing-pill",
 };
 
 const dimension = (
@@ -139,7 +154,9 @@ export function readInitialState(search = location.search): StudioState {
         : "spectrum",
       motion: value.motion === true,
       referenceLayout: value.referenceLayout === true,
-      example: ["button", "card", "type", "empty"].includes(value.example)
+      example: ["landing-pill", "button", "card", "type", "empty"].includes(
+        value.example,
+      )
         ? value.example
         : "button",
     };
@@ -162,7 +179,11 @@ export function componentProps(state: StudioState): GlassOwnProps {
 export function componentCode(state: StudioState) {
   const base = PRESETS[state.preset],
     values = componentProps(state);
-  const props = [`as="${state.example === "button" ? "button" : "div"}"`];
+  const clickable =
+    state.example === "button" || state.example === "landing-pill";
+  const props = [`as="${clickable ? "button" : "div"}"`];
+  if (clickable) props.push('type="button"');
+  if (state.example === "landing-pill") props.push('className="demo-pill"');
   for (const [key, value] of Object.entries(values)) {
     if (value === undefined) continue;
     if (
@@ -178,18 +199,25 @@ export function componentCode(state: StudioState) {
     );
   }
   const content =
-    state.example === "card"
-      ? "<div><strong style={{ fontSize: 28 }}>A new perspective</strong><p style={{ fontSize: 16 }}>Your own HTML, seen through glass.</p></div>"
-      : state.example === "type"
-        ? "<span style={{ fontSize: 72, lineHeight: 0.9, fontWeight: 700 }}>LOOK<br />AGAIN.</span>"
-        : state.example === "empty"
-          ? ""
-          : "Explore the glass";
-  const clickable = state.example === "button";
-  const styleCode = Object.entries(getExampleStyle(state.background))
+    state.example === "landing-pill"
+      ? `<span>${landingPillLabel}</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ flex: "none" }}><path d="${landingPillArrow}" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>`
+      : state.example === "card"
+        ? "<div><strong style={{ fontSize: 28 }}>A new perspective</strong><p style={{ fontSize: 16 }}>Your own HTML, seen through glass.</p></div>"
+        : state.example === "type"
+          ? "<span style={{ fontSize: 72, lineHeight: 0.9, fontWeight: 700 }}>LOOK<br />AGAIN.</span>"
+          : state.example === "empty"
+            ? ""
+            : "Explore the glass";
+  const styleCode = Object.entries(
+    getExampleStyle(state.background, state.example, state.height),
+  )
     .map(([key, value]) => `          ${key}: ${JSON.stringify(value)},`)
     .join("\n");
-  return `'use client';\n\n${clickable ? "import { useState } from 'react';\n" : ""}import { LiquidGlass } from 'react-glaze';\n\nexport function GlassExample() {\n${clickable ? "  const [clicks, setClicks] = useState(0);\n" : ""}  return (\n    <>\n      <LiquidGlass\n        ${props.join("\n        ")}\n        style={{\n${styleCode}\n        }}${clickable ? "\n        onClick={() => setClicks(n => n + 1)}" : ""}\n      >\n        ${content}\n      </LiquidGlass>${clickable ? '\n      <p aria-live="polite">Clicks: {clicks}</p>' : ""}\n    </>\n  );\n}`;
+  const presentation =
+    state.example === "landing-pill"
+      ? `\n      <style>{${JSON.stringify('@font-face { font-family: "Glaze Inter"; src: url("https://react-glaze.app/fonts/inter-600.ttf") format("truetype"); font-weight: 600; font-display: swap; }\n' + pillResponsiveCss)}}</style>`
+      : "";
+  return `'use client';\n\n${clickable ? "import { useState } from 'react';\n" : ""}import { LiquidGlass } from 'react-glaze';\n\nexport function GlassExample() {\n${clickable ? "  const [clicks, setClicks] = useState(0);\n" : ""}  return (\n    <>${presentation}\n      <LiquidGlass\n        ${props.join("\n        ")}\n        style={{\n${styleCode}\n        }}${clickable ? "\n        onClick={() => setClicks(n => n + 1)}" : ""}\n      >\n        ${content}\n      </LiquidGlass>${clickable ? '\n      <p aria-live="polite">Clicks: {clicks}</p>' : ""}\n    </>\n  );\n}`;
 }
 
 export function shareableState(state: StudioState) {
