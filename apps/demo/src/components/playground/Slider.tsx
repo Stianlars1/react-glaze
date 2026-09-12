@@ -21,7 +21,7 @@ export function Slider({
   return (
     <label className="slider-row" htmlFor={id}>
       <span>{label}</span>
-      <output htmlFor={id}>
+      <output aria-hidden="true" htmlFor={id}>
         {Number(value.toFixed(3))}
         {unit}
       </output>
@@ -32,6 +32,7 @@ export function Slider({
         max={max}
         step={step}
         value={value}
+        aria-valuetext={unit ? `${Number(value.toFixed(3))}${unit}` : undefined}
         onChange={(event) => onChange(Number(event.target.value))}
       />
     </label>

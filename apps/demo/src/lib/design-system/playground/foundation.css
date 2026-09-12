@@ -1,129 +1,146 @@
 .playground-shell {
-  min-height: 100dvh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 16px;
-  line-height: normal;
-  color: #e9eee6;
-  background: #101612;
+  --playground-gutter: clamp(var(--space-5), 4.4vw, var(--space-8));
+  --playground-stage-radius: calc(var(--radius-lg) * 2);
+  --playground-sidebar: 20rem;
+  --playground-gap: clamp(var(--space-6), 4vw, var(--space-8));
+  --playground-photo-ink: 0 0% 100%;
+  --playground-photo-shade: 0 0% 0%;
+  --playground-optical-paper: 60 20% 95%;
+  --playground-optical-ink: 105 6% 13%;
+  min-height: 100svh;
+  padding-inline: var(--playground-gutter);
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: var(--leading-body);
   font-synthesis: none;
-  color-scheme: dark;
-  --playground-accent: #cde598;
-  --playground-muted: #97a494;
-  --playground-line: #344032;
-  --playground-panel: #151d17;
-  --playground-raised: #222c21;
 }
 .playground-shell * {
   box-sizing: border-box;
 }
-.playground-shell {
+.playground-shell :is(h1, h2, p) {
   margin: 0;
 }
-.playground-shell button,
-.playground-shell input,
-.playground-shell select {
+.playground-shell :is(button, input, select) {
   font: inherit;
 }
-.playground-shell button,
-.playground-shell a,
-.playground-shell input,
-.playground-shell select {
+.playground-shell :is(button, a, input, select, summary) {
   touch-action: manipulation;
 }
-.playground-shell button:where(:not([data-liquid-host])) {
-  cursor: pointer;
-  color: inherit;
-  background: var(--playground-raised);
-  border: 1px solid var(--playground-line);
-  border-radius: 8px;
-  min-height: 40px;
-  padding: 8px 16px;
-}
-.playground-shell button:where(:not([data-liquid-host])):hover {
-  border-color: #768768;
-}
-.playground-shell button:focus-visible,
-.playground-shell a:focus-visible,
-.playground-shell input:focus-visible,
-.playground-shell select:focus-visible,
-.playground-shell summary:focus-visible {
-  outline: 2px solid var(--playground-accent);
-  outline-offset: 4px;
-}
-.playground-shell button[aria-pressed="true"] {
-  background: #344128;
-  border-color: #748659;
-  color: #e0f3af;
-}
 .playground-shell a {
-  color: var(--playground-accent);
+  color: inherit;
   text-decoration: none;
 }
-.playground-shell a:hover {
+.playground-shell button:where(:not([data-liquid-host])) {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-full);
+  color: hsl(var(--foreground));
+  background: transparent;
+  cursor: pointer;
+  transition:
+    transform var(--duration-press) var(--ease-out),
+    opacity var(--duration-fast) var(--ease-soft);
+}
+.playground-shell button:where(:not([data-liquid-host])):active:not(:disabled) {
+  transform: scale(var(--press-scale-subtle));
+}
+.playground-shell button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.playground-shell button[aria-pressed="true"]:not([data-liquid-host]) {
+  color: hsl(var(--background));
+  background: hsl(var(--foreground));
+  border-color: transparent;
+}
+.playground-shell :focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: var(--space-1);
+}
+.playground-shell .text-button {
+  border: 0;
+  padding-inline: 0;
+  background: transparent;
   text-decoration: underline;
-  text-underline-offset: 5px;
+  text-underline-offset: var(--space-1);
 }
-.playground-shell h1,
-.playground-shell h2,
-.playground-shell p {
-  margin: 0;
-}
-.playground-shell h1,
-.playground-shell h2 {
-  line-height: normal;
-  text-wrap: wrap;
-}
-.playground-shell .playground-loading {
-  padding: 28px;
-}
-.playground-shell .app-header {
-  height: 64px;
-  display: flex;
-  align-items: center;
-  gap: 48px;
-  padding: 0 28px;
-  border-bottom: 1px solid var(--playground-line);
-}
-.playground-shell .app-header h1 {
-  font-size: 24px;
-  letter-spacing: -0.035em;
-  color: var(--playground-accent);
-  font-weight: 600;
+.playground-shell .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
   white-space: nowrap;
 }
-.playground-shell .app-header h1 a {
+.playground-shell .skip-link {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--playground-gutter);
+  z-index: var(--z-overlay);
+  padding: var(--space-3) var(--space-4);
+  background: hsl(var(--background));
+  transform: translateY(-200%);
+}
+.playground-shell .skip-link:focus {
+  transform: none;
+}
+.playground-shell .playground-loading {
+  padding-block: var(--space-7);
+}
+.playground-shell .app-header {
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  max-width: calc(var(--width-wide) * 1.25);
+  margin-inline: auto;
+}
+.playground-shell .playground-brand {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
-  color: inherit;
-  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
 }
-.playground-shell .app-header .brand-icon {
+.playground-shell .brand-icon {
   width: calc(var(--space-5) + var(--space-4));
   height: calc(var(--space-5) + var(--space-4));
   flex: none;
 }
 .playground-shell .app-header nav {
-  height: 100%;
   display: flex;
-  gap: 30px;
   align-items: center;
+  gap: var(--space-5);
 }
 .playground-shell .app-header nav a {
-  height: 100%;
-  display: grid;
-  place-items: center;
-  font-size: 15px;
-  color: #d7ded3;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.8rem;
 }
 .playground-shell .app-header nav a[aria-current] {
-  color: var(--playground-accent);
-  border-bottom: 2px solid var(--playground-accent);
+  color: hsl(var(--foreground));
+  text-decoration: underline;
+  text-underline-offset: var(--space-2);
 }
-.playground-shell .alpha {
-  margin-left: auto;
-  font-size: 13px;
-  color: var(--playground-accent);
-  white-space: nowrap;
+@media (hover: hover) and (pointer: fine) {
+  .playground-shell
+    button:where(
+      :not([data-liquid-host], :disabled, [aria-pressed="true"])
+    ):hover {
+    background: hsl(var(--accent));
+  }
+  .playground-shell a:hover {
+    text-decoration: underline;
+    text-underline-offset: var(--space-1);
+  }
 }

@@ -113,7 +113,9 @@ test("JSX exports rim settings as an object expression", () => {
 });
 
 test("rim changes leave material settings and the existing JSX export intact", () => {
-  const baseline = readInitialState(searchFor({ ...shareableState(initialState), rimLight: false }));
+  const baseline = readInitialState(
+    searchFor({ ...shareableState(initialState), rimLight: false }),
+  );
   const withRim = readInitialState(
     searchFor({
       ...shareableState(baseline),
@@ -152,26 +154,71 @@ test("custom background fallback keeps the selected rim configuration", () => {
   assert.deepEqual(readInitialState(searchFor(shared)).rimLight, rimLight);
 });
 
- test("empty and malformed queries use the owner-selected playground defaults", () => {
+test("fresh and malformed queries use the exact landing pill material", () => {
   for (const search of ["", "?config={"]) {
     const state = readInitialState(search);
-    assert.equal(state.preset, "frosted");
-    assert.equal(state.background, "optical-type");
-    assert.equal(state.width, "fit-content");
-    assert.equal(state.height, "fit-content");
-    assert.equal(state.example, "button");
-    assert.equal(state.motion, false);
-    assert.equal(state.referenceLayout, false);
-    assert.equal(state.customShape, false);
-    assert.deepEqual(state.rimLight, { mode: "pointer", onLeave: "return", strength: 0.45, width: 2, reach: 100, response: 0.16 });
-    assert.deepEqual(state.settings, {
-      enabled: true, shape: "pill", optics: "smooth", lighting: "responsive",
-      radius: 32, depth: 0.42, contentMode: "sharp", color: "#ffffff",
-      roughness: 0.345, transmission: 0.84, thickness: 0.52, ior: 1.27,
-      dispersion: 0.2, clearcoat: 0, clearcoatRoughness: 0.86,
-      attenuationColor: "#ffffff", attenuationDistance: 50,
-      envMapIntensity: 1.25, exposure: 1.25, shadowOpacity: 0.38, maxDpr: 2,
+    assert.equal(state.preset, "reference");
+    assert.equal(state.background, "soft");
+    assert.equal(state.width, 280);
+    assert.equal(state.height, "auto");
+    assert.equal(state.example, "landing-pill");
+    assert.equal(state.settings.shape, "pill");
+    assert.equal(state.settings.lighting, "responsive");
+    assert.equal(state.settings.contentMode, "sharp");
+    assert.equal(state.settings.maxDpr, 2);
+    assert.deepEqual(state.rimLight, {
+      ...RIM_LIGHT_DEFAULTS,
+      mode: "pointer",
+      onLeave: "hold",
     });
     assert.deepEqual(readInitialState(searchFor(shareableState(state))), state);
   }
+});
+
+test("all landing artworks survive shared links", () => {
+  for (const background of ["soft", "metal", "garden"]) {
+    const state = { ...initialState, background };
+    assert.deepEqual(readInitialState(searchFor(shareableState(state))), state);
+  }
+});
+
+test("previous button configurations keep their original content and presentation", () => {
+  const legacy = readInitialState(
+    searchFor({
+      preset: "frosted",
+      example: "button",
+      background: "optical-type",
+      width: "fit-content",
+      height: "fit-content",
+      settings: {
+        shape: "pill",
+        roughness: 0.345,
+        thickness: 0.52,
+        ior: 1.27,
+        lighting: "responsive",
+      },
+      rimLight: { ...RIM_LIGHT_DEFAULTS, strength: 0.45, onLeave: "return" },
+    }),
+  );
+  assert.equal(legacy.example, "button");
+  assert.equal(legacy.background, "optical-type");
+  assert.equal(legacy.settings.thickness, 0.52);
+  assert.equal(legacy.settings.roughness, 0.345);
+  const code = componentCode(legacy);
+  assert.match(code, /Explore the glass/);
+  assert.match(code, /fontSize: 32/);
+  assert.doesNotMatch(code, /demo-pill|A different feeling/);
+});
+
+test("landing pill JSX contains its presentation, responsive size, label and arrow", () => {
+  const code = componentCode(initialState);
+  assert.match(code, /as="button"/);
+  assert.match(code, /type="button"/);
+  assert.match(code, /className="demo-pill"/);
+  assert.match(code, /A different feeling/);
+  assert.match(code, /<svg/);
+  assert.match(code, /--demo-pill-height: 76px/);
+  assert.match(code, /minHeight: "var\(--demo-pill-height, 100px\)"/);
+  assert.match(code, /inter-600.ttf/);
+  assert.match(code, /"onLeave":"hold"/);
 });

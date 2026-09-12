@@ -31,3 +31,39 @@ export function CopyIcon() {
     </svg>
   );
 }
+
+export function CheckIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m5 12 4 4 10-10" />
+    </svg>
+  );
+}
+
+export function ChevronIcon({ up = false }: { up?: boolean }) {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d={up ? "m6 15 6-6 6 6" : "m6 9 6 6 6-6"} />
+    </svg>
+  );
+}

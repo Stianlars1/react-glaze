@@ -1,0 +1,373 @@
+.playground-shell {
+  /* The library canvases extend 24px beyond controls for optical shadows. */
+  overflow-x: clip;
+  --control-fill: var(--background);
+  --control-ink: var(--foreground);
+  --control-shadow: 0 0% 0%;
+  --icon-swap-dur: var(--duration-fast);
+  --icon-swap-ease: var(--ease-out);
+  --icon-swap-blur: 0px;
+  --icon-swap-start-scale: var(--enter-scale);
+}
+/* Keep each group an ordinary, bounded backdrop for its glass controls. */
+.playground-shell
+  :is(
+    .workspace-actions,
+    .preview-toolbar,
+    .drag-toolbar,
+    .scene-options,
+    .inspector,
+    .wallpaper-tray,
+    .background-note,
+    .reference-toolbar,
+    .code-header,
+    .saved-config
+  ) {
+  background-color: hsl(var(--background));
+  transition: background-color var(--duration-fast) var(--ease-soft);
+}
+.playground-shell [data-liquid-host].glass-control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid hsl(var(--foreground) / 0.17);
+  border-radius: var(--radius-full);
+  background: hsl(var(--muted) / 0.3);
+  color: hsl(var(--control-ink));
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: var(--leading-body);
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-tap-highlight-color: hsl(var(--foreground) / 0.08);
+  box-shadow:
+    0 1px 2px hsl(var(--control-shadow) / 0.08),
+    0 4px 12px hsl(var(--control-shadow) / 0.05),
+    inset 0 1px 0 hsl(var(--foreground) / 0.08);
+}
+.playground-shell .glass-control::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: hsl(var(--control-fill) / 0.72);
+  z-index: 0;
+}
+.playground-shell [data-liquid-host].glass-control[aria-pressed="true"] {
+  --control-fill: var(--foreground);
+  --control-ink: var(--background);
+  border-color: hsl(var(--foreground) / 0.5);
+}
+.playground-shell .glass-control[aria-pressed="true"]::before {
+  background: hsl(var(--control-fill) / 0.94);
+}
+.playground-shell .glass-control-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: inherit;
+  flex: 1;
+  min-width: 0;
+  gap: var(--space-2);
+  transition: transform var(--duration-press) var(--ease-out);
+}
+.playground-shell .glass-control:active:not(:disabled)::before {
+  background: hsl(var(--control-fill) / 0.8);
+}
+.playground-shell .glass-control[aria-pressed="true"]:active::before {
+  background: hsl(var(--control-fill));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .playground-shell
+    button.glass-control:active:not(:disabled):not(:focus-visible)
+    .glass-control-content,
+  .playground-shell summary:active:not(:focus-visible) .glass-control-content {
+    transform: scale(var(--press-scale-subtle));
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .playground-shell .glass-control:not(:disabled):hover {
+    border-color: hsl(var(--foreground) / 0.35);
+  }
+}
+.playground-shell [data-liquid-host].glass-control:disabled {
+  cursor: default;
+  opacity: 0.55;
+  box-shadow: none;
+}
+.playground-shell .control-selection {
+  display: inline-flex;
+  flex: none;
+  opacity: 0;
+}
+.playground-shell .control-selection svg {
+  width: var(--space-3);
+  height: var(--space-3);
+}
+.playground-shell .glass-control[aria-pressed="true"] .control-selection {
+  opacity: 1;
+}
+.playground-shell .control-focus-ring {
+  position: absolute;
+  inset: calc(var(--space-1) * -1 - 1px);
+  z-index: 2;
+  border: 2px solid hsl(var(--ring));
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+}
+.playground-shell [data-liquid-host].glass-control:focus-visible {
+  outline: none;
+}
+.playground-shell .glass-control:focus-visible > .control-focus-ring {
+  opacity: 1;
+}
+.playground-shell .glass-control:focus-visible .glass-control-content,
+.playground-shell summary:focus-visible .glass-control-content {
+  transition: none;
+}
+.playground-shell .scene-options .glass-control {
+  flex: 1;
+  padding-inline: var(--space-3);
+}
+.playground-shell .scene-options .glass-control-content {
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+}
+.playground-shell [data-liquid-host].landing-preset {
+  width: 100%;
+  padding: var(--space-4) var(--space-3);
+  border-radius: var(--radius-lg);
+  text-align: start;
+}
+.playground-shell .landing-preset .glass-control-content {
+  justify-content: flex-start;
+  gap: var(--space-3);
+}
+.playground-shell .landing-preset strong {
+  font-size: 0.8rem;
+}
+.playground-shell [data-liquid-host].wallpaper-option {
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+  text-align: start;
+}
+.playground-shell .wallpaper-option .glass-control-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-2);
+}
+.playground-shell .wallpaper-option :is(img, .optical-thumbnail) {
+  grid-column: 1 / -1;
+}
+.playground-shell .wallpaper-option .control-selection {
+  margin-inline-end: var(--space-1);
+}
+.playground-shell .glass-control.copy-action .glass-control-content {
+  gap: var(--space-2);
+}
+.playground-shell .copy-action svg {
+  width: var(--space-4);
+  height: var(--space-4);
+}
+.playground-shell .segmented,
+.playground-shell .code-tabs {
+  gap: var(--space-2);
+}
+.playground-shell .code-tabs .glass-control {
+  padding-inline: var(--space-3);
+}
+.playground-shell .control-note .glass-control {
+  margin-top: var(--space-2);
+}
+.playground-shell :is(.control-details, .scene-tools) {
+  border: 0;
+  margin-block: var(--space-2);
+}
+.playground-shell :is(.control-details, .scene-tools) > summary {
+  display: block;
+  min-height: 44px;
+  padding: 0;
+}
+.playground-shell :is(.control-details, .scene-tools) > summary::after {
+  content: none;
+}
+.playground-shell .scene-tools summary > .glass-summary {
+  margin: 0;
+}
+.playground-shell [data-liquid-host].glass-summary {
+  display: flex;
+  width: 100%;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-md);
+  border-color: hsl(var(--foreground) / 0.08);
+  box-shadow: none;
+}
+.playground-shell .glass-summary::before {
+  background: hsl(var(--control-fill) / 0.8);
+}
+.playground-shell .glass-summary .glass-control-content {
+  justify-content: flex-start;
+  gap: var(--space-3);
+}
+.playground-shell .summary-detail {
+  margin-inline-start: auto;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.7rem;
+}
+.playground-shell .disclosure-icon {
+  margin-inline-start: auto;
+  flex: none;
+}
+.playground-shell .summary-detail + .disclosure-icon {
+  margin-inline-start: 0;
+}
+.playground-shell .control-details[open] {
+  margin-bottom: var(--space-4);
+}
+.playground-shell .control-details > .control-section {
+  padding-inline: var(--space-3);
+}
+.playground-shell .color-row input {
+  width: 44px;
+  height: 44px;
+}
+@media (max-width: 600px) {
+  .playground-shell .scene-number {
+    display: none;
+  }
+  .playground-shell .scene-options .glass-control {
+    padding-inline: var(--space-2);
+    font-size: 0.7rem;
+  }
+  .playground-shell .code-header {
+    gap: var(--space-2);
+  }
+  .playground-shell .code-header h2 {
+    flex-basis: 100%;
+  }
+  .playground-shell .code-tabs {
+    margin-inline-start: 0;
+  }
+  .playground-shell .code-header .copy-action {
+    margin-inline-start: auto;
+  }
+  .playground-shell .summary-detail {
+    font-size: 0.65rem;
+  }
+  .playground-shell .glass-control {
+    max-width: 100%;
+  }
+}
+@media (prefers-reduced-transparency: reduce),
+  (prefers-contrast: more),
+  (forced-colors: active) {
+  .playground-shell [data-liquid-host].glass-control {
+    background: hsl(var(--control-fill));
+    border-color: hsl(var(--foreground));
+    box-shadow: none;
+  }
+  .playground-shell .glass-control::before {
+    background: hsl(var(--control-fill));
+  }
+}
+
+/* Empty live regions stay in the accessibility tree before their first update. */
+.playground-shell .copy-feedback:empty,
+.playground-shell .link-feedback:empty,
+.playground-shell .copy-feedback[data-empty="true"],
+.playground-shell .link-feedback[data-empty="true"] {
+  display: block;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (forced-colors: active) {
+  .playground-shell .control-focus-ring {
+    border-color: Highlight;
+  }
+  .playground-shell [data-liquid-host].glass-control {
+    color: ButtonText;
+    background: ButtonFace;
+    border-color: ButtonText;
+  }
+  .playground-shell .glass-control::before {
+    display: none;
+  }
+  .playground-shell [data-liquid-host].glass-control[aria-pressed="true"] {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: Highlight;
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+  .playground-shell .slider-row input::-webkit-slider-runnable-track {
+    background: CanvasText;
+  }
+  .playground-shell .slider-row input::-webkit-slider-thumb {
+    background: Highlight;
+    border: 1px solid ButtonText;
+  }
+  .playground-shell .slider-row input::-moz-range-track {
+    background: CanvasText;
+  }
+  .playground-shell .slider-row input::-moz-range-thumb {
+    background: Highlight;
+    border: 1px solid ButtonText;
+  }
+}
+.playground-shell .scene-options {
+  flex-wrap: wrap;
+}
+.playground-shell .scene-options .glass-control {
+  flex: 1 1 5.5rem;
+}
+@media (max-width: 600px) {
+  .playground-shell .scene-options .glass-control {
+    padding-inline: var(--space-1);
+    font-size: 0.65rem;
+  }
+  .playground-shell .scene-options .glass-control-content {
+    flex-wrap: nowrap;
+    gap: var(--space-1);
+  }
+}
+.playground-shell .preview-toolbar,
+.playground-shell .code-header {
+  flex-wrap: wrap;
+}
+.playground-shell .segmented .glass-control,
+.playground-shell .code-tabs .glass-control,
+.playground-shell .copy-action {
+  flex-shrink: 0;
+}
+.playground-shell .wallpaper-options {
+  grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+}
+.playground-shell .code-panel {
+  container-type: inline-size;
+}
+@container (max-width: 30rem) {
+  .playground-shell .code-header h2 {
+    flex-basis: 100%;
+  }
+  .playground-shell .code-tabs {
+    margin-inline-start: 0;
+  }
+}
+/* Size and weight carry hierarchy while labels retain contrast over the material. */
+.playground-shell .glass-control :is(small, .preset-apply, .summary-detail) { color: inherit; }

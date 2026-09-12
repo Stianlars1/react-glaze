@@ -1,388 +1,187 @@
-@keyframes playground-wallpaper-pan {
-  from {
-    transform: scale(1.08) translate(-1.5%, -1%);
-  }
-  to {
-    transform: scale(1.2) translate(2%, 1.5%);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .playground-shell .preview[data-motion="true"] .wallpaper {
-    animation: none;
-  }
-}
-@media (max-width: 1050px) {
-  .playground-shell .workspace {
-    grid-template-columns: minmax(0, 1fr) 300px;
-    padding: 12px;
-    gap: 12px;
-  }
-  .playground-shell .preview {
-    height: 440px;
-    margin: 0 10px;
-  }
-  .playground-shell .preview-toolbar {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .playground-shell .wallpaper-option {
-    width: 110px;
-    max-width: 15vw;
-  }
-  .playground-shell .wallpaper-option img {
-    height: 60px;
-  }
-  .playground-shell .wallpaper-tray {
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-  .playground-shell .shuffle {
-    margin-left: auto;
-  }
-  .playground-shell .app-header {
-    padding-inline: 20px;
-    gap: 30px;
-  }
-  .playground-shell .control-section {
-    padding-inline: 16px;
-  }
-  .playground-shell .inspector-title,
-  .playground-shell .preset-control {
-    padding-inline: 16px;
-  }
-}
-@media (max-width: 760px) {
-  .playground-shell .workspace {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    gap: 16px;
-  }
-  .playground-shell .main-column,
-  .playground-shell .inspector {
-    width: 100%;
+@media (max-width: 1100px) {
+  .playground-shell {
+    --playground-gutter: var(--space-6);
+    --playground-gap: var(--space-6);
+    --playground-sidebar: 18rem;
   }
   .playground-shell .inspector {
-    position: static;
-    max-height: none;
-    overflow: visible;
+    padding-inline-start: var(--space-5);
   }
-  .playground-shell .app-header {
-    height: 58px;
-    gap: 22px;
-    padding-inline: 16px;
-  }
-  .playground-shell .app-header h1 {
-    font-size: 20px;
-  }
-  .playground-shell .app-header nav {
-    gap: 16px;
-  }
-  .playground-shell .app-header nav a {
-    font-size: 12px;
-  }
-  .playground-shell .alpha {
+  .playground-shell .preset-pill-mark {
     display: none;
   }
-  .playground-shell .preview {
-    height: 430px;
+}
+@media (max-width: 860px) {
+  .playground-shell {
+    --playground-gutter: var(--space-5);
+    --playground-stage-radius: var(--radius-lg);
   }
-  .playground-shell .preview-toolbar {
-    padding: 14px 10px;
+  .playground-shell .app-header {
+    min-height: 72px;
   }
-  .playground-shell .segmented button {
-    min-width: 120px;
-    font-size: 12px;
+  .playground-shell .preview-panel {
+    position: static;
   }
-  .playground-shell .motion-toggle {
-    font-size: 11px;
+  .playground-shell .editor-layout,
+  .playground-shell .workspace-output {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
   }
-  .playground-shell .wallpaper-options {
-    flex: 1;
-    gap: 9px;
+  .playground-shell .workspace-intro {
+    align-items: start;
+    padding-block: var(--space-4) var(--space-5);
   }
-  .playground-shell .wallpaper-option {
-    width: 100%;
-    max-width: none;
-    flex: 1;
+  .playground-shell .workspace-actions {
+    gap: var(--space-3);
   }
-  .playground-shell .wallpaper-option img {
-    height: 64px;
+  .playground-shell .inspector {
+    border-inline-start: 0;
+    border-top: 1px solid hsl(var(--border));
+    padding: var(--space-5) 0 0;
   }
-  .playground-shell .wallpaper-tray {
-    padding: 13px;
-    gap: 13px;
+  .playground-shell .preset-pill-mark {
+    display: block;
   }
-  .playground-shell .shuffle {
-    min-width: 100%;
-    font-size: 13px;
+  .playground-shell .landing-preset {
+    max-width: 28rem;
   }
-  .playground-shell .preview-status {
-    font-size: 10px;
-    padding-inline: 13px;
-    gap: 12px;
+  .playground-shell .workspace-output {
+    margin-block: var(--space-6);
   }
-  .playground-shell .code-header {
-    padding-inline: 13px;
-    gap: 12px;
+  .playground-shell .saved-config {
+    border-top: 1px solid hsl(var(--border));
+    padding-top: var(--space-5);
   }
-  .playground-shell pre {
-    padding: 15px;
-    font-size: 10px;
-  }
-  .playground-shell .workspace-footer {
-    padding-inline: 5px;
-  }
-  .playground-shell .control-section {
-    padding-inline: 20px;
-  }
-  .playground-shell .inspector-title,
-  .playground-shell .preset-control {
-    padding-inline: 20px;
+  .playground-shell .saved-config-actions button:first-child {
+    flex-basis: auto;
   }
   .playground-shell .select-row select {
-    max-width: 220px;
-  }
-}
-@media (max-width: 380px) {
-  .playground-shell .app-header {
-    gap: 14px;
-  }
-  .playground-shell .alpha {
-    display: none;
+    min-width: 50%;
   }
   .playground-shell .preview {
-    height: 380px;
+    height: clamp(300px, 52svh, 560px);
   }
-  .playground-shell .motion-toggle {
-    margin-top: 2px;
+}
+@media (max-width: 600px) {
+  .playground-shell {
+    --playground-gutter: var(--space-4);
+  }
+  .playground-shell .app-header {
+    min-height: 64px;
+    gap: var(--space-3);
+  }
+  .playground-shell .playground-brand {
+    font-size: 0.85rem;
+  }
+  .playground-shell .app-header nav {
+    gap: var(--space-3);
+  }
+  .playground-shell .app-header nav a {
+    font-size: 0.7rem;
+  }
+  .playground-shell .app-header nav a:first-child {
+    display: none;
+  }
+  .playground-shell .brand-icon {
+    width: var(--space-6);
+    height: var(--space-6);
+  }
+  .playground-shell .workspace-intro {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .playground-shell .workspace-intro h1 {
+    font-size: 1.65rem;
+  }
+  .playground-shell .workspace-intro p {
+    font-size: 0.8rem;
+  }
+  .playground-shell .workspace-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .playground-shell .workspace-actions button {
+    font-size: 0.75rem;
+  }
+  .playground-shell .link-feedback {
+    position: static;
+    max-width: 18ch;
+    font-size: 0.65rem;
+  }
+  .playground-shell .link-feedback:empty {
+    display: none;
+  }
+  .playground-shell .preview-toolbar {
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-3);
   }
   .playground-shell .segmented button {
-    min-width: 112px;
+    padding-inline: var(--space-3);
+    font-size: 0.68rem;
   }
-}
-.playground-shell .preview [data-liquid-host] {
-  cursor: grab;
-  touch-action: none;
-  user-select: none;
-}
-.playground-shell .preview [data-dragging="true"] {
-  cursor: grabbing;
-}
-.playground-shell .drag-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 16px 0;
-  color: var(--playground-muted);
-  font-size: 11px;
-}
-.playground-shell .drag-toolbar button {
-  min-height: 32px;
-  padding: 4px 12px;
-  font-size: 11px;
-  color: var(--playground-accent);
-}
-.playground-shell .drag-toolbar button:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
-.playground-shell .wallpaper {
-  -webkit-user-drag: none;
-}
-.playground-shell .optical-backdrop {
-  position: absolute;
-  inset: 0;
-  background: #f5f5f0;
-  pointer-events: none;
-}
-.playground-shell .preview[data-background='optical-type'] {
-  background-color: #f5f5f0;
-}
-.playground-shell .preview[data-background='optical-type'] [data-liquid-host] {
-  text-shadow: none;
-}
-.playground-shell .optical-thumbnail {
-  width: 100%;
-  height: 76px;
-  background: #f5f5f0;
-  color: #20231f;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  display: grid;
-  place-content: center;
-  font: 600 24px/.9 Inter,sans-serif;
-  letter-spacing: -1px;
-}
-.playground-shell .wallpaper-option[aria-pressed='true'] .optical-thumbnail {
-  border-color: #dfec89;
-}
-.playground-shell .background-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: none;
-}
-.playground-shell .background-actions button {
-  font-size: 12px;
-  padding: 7px 12px;
-}
-.playground-shell .background-actions .shuffle {
-  min-width: 0;
-}
-.playground-shell .reference-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 16px 0;
-}
-.playground-shell .reference-toolbar button {
-  font-size: 12px;
-  color: var(--playground-accent);
-}
-.playground-shell .reference-toolbar span,.playground-shell .background-note {
-  font-size: 11px;
-  color: var(--playground-muted);
-}
-.playground-shell .background-note {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 0 16px 14px;
-  line-height: 1.6;
-}
-.playground-shell .background-note button {
-  font-size: 11px;
-  min-height: 30px;
-  padding: 4px 8px;
-  flex: none;
-}
-.playground-shell .background-error {
-  color: #ffc7ad;
-  font-size: 12px;
-  padding: 0 16px 14px;
-}
-.playground-shell .visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-.playground-shell .wallpaper-options {
-  overflow-x: auto;
-  padding-bottom: 3px;
-}
-.playground-shell .wallpaper-option {
-  flex: 0 0 120px;
-}
-.playground-shell .background-actions button:disabled {
-  opacity: .5;
-  cursor: wait;
-}
-@media(max-width:1050px) {
-  .playground-shell .wallpaper-tray {
-    flex-wrap: nowrap;
+  .playground-shell .motion-toggle {
+    font-size: 0.62rem;
   }
-  .playground-shell .wallpaper-option {
-    flex-basis: 96px;
+  .playground-shell .preview {
+    height: clamp(260px, 40svh, 380px);
   }
-  .playground-shell .optical-thumbnail {
-    height: 60px;
-    font-size: 20px;
+  .playground-shell .wallpaper {
+    object-position: 50% 59%;
   }
-}
-@media(max-width:760px) {
-  .playground-shell .wallpaper-tray {
+  .playground-shell .scene-options button {
+    gap: var(--space-1);
+    font-size: 0.65rem;
+  }
+  .playground-shell .drag-toolbar,
+  .playground-shell .preview-status {
+    font-size: 0.62rem;
+  }
+  .playground-shell .code-header {
     flex-wrap: wrap;
+    padding-inline: var(--space-4);
   }
-  .playground-shell .wallpaper-options {
-    flex: 0 0 100%;
-    width: 100%;
+  .playground-shell .code-header h2 {
+    font-size: 0.9rem;
   }
-  .playground-shell .wallpaper-option {
-    flex: 0 0 82px;
+  .playground-shell .code-tabs button {
+    padding-inline: var(--space-2);
   }
-  .playground-shell .optical-thumbnail {
-    height: 64px;
+  .playground-shell .copy {
+    padding-inline: var(--space-3);
   }
-  .playground-shell .background-actions {
-    flex-direction: row;
-    width: 100%;
-  }
-  .playground-shell .background-actions button {
-    flex: 1;
+  .playground-shell pre {
+    padding: var(--space-4);
+    font-size: 0.65rem;
   }
   .playground-shell .reference-toolbar {
     align-items: start;
+    flex-direction: column;
+    gap: var(--space-2);
   }
-  .playground-shell .reference-toolbar span {
-    max-width: 22ch;
+  .playground-shell .scene-tools summary > span {
+    font-size: 0.62rem;
   }
   .playground-shell .background-note {
     align-items: start;
   }
+  .playground-shell select,
+  .playground-shell input {
+    font-size: 1rem;
+  }
+  .playground-shell .workspace-footer {
+    align-items: start;
+    flex-direction: column;
+    font-size: 0.65rem;
+  }
+  .playground-shell .workspace-footer > div {
+    gap: var(--space-4);
+  }
 }
-.playground-shell .preview [data-liquid-host]:focus-visible {
-  outline: none;
-}
-.playground-shell .glass-focus-ring {
-  position: absolute;
-  inset: -9px;
-  border: 2px solid #effbc2;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0;
-}
-.playground-shell .preview [data-liquid-host]:focus-visible > .glass-focus-ring {
-  opacity: 1;
-}
-.playground-shell .dimension-control {
-  min-width: 0;
-}
-.playground-shell .text-button {
-  appearance: none;
-  border: 0;
-  padding: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.playground-shell .saved-config {
-  margin-top: 16px;
-  padding: 16px;
-  border: 1px solid var(--playground-line);
-  border-radius: 10px;
-  background: var(--playground-panel);
-}
-.playground-shell .saved-config h2 {
-  margin: 0 0 6px;
-  font-size: 16px;
-  font-weight: 550;
-  color: var(--playground-accent);
-}
-.playground-shell .saved-config p {
-  margin: 0;
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--playground-muted);
-}
-.playground-shell .saved-config-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-.playground-shell .saved-config .saved-config-status:not(:empty) {
-  margin-top: 10px;
-  color: inherit;
-}
-.playground-shell .saved-config-actions button:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
+@media (forced-colors: active) {
+  .playground-shell .glass-focus-ring {
+    border-color: Highlight;
+  }
+  .playground-shell button[aria-pressed="true"] {
+    outline: 2px solid Highlight;
+  }
 }

@@ -1,3 +1,4 @@
+import { GlassButton } from "./GlassButton";
 import { hasFixedRadius, isRatioShape } from "react-glaze";
 import type { GlassShape } from "react-glaze";
 import type { Dispatch, SetStateAction } from "react";
@@ -40,7 +41,9 @@ function DimensionControl({
       {typeof value === "number" && (
         <label className="slider-row" htmlFor={id + "-value"}>
           <span>{label} value</span>
-          <output htmlFor={id + "-value"}>{Math.round(value)} px</output>
+          <output aria-hidden="true" htmlFor={id + "-value"}>
+            {Math.round(value)} px
+          </output>
           <input
             id={id + "-value"}
             type="range"
@@ -48,6 +51,7 @@ function DimensionControl({
             max={label === "Height" ? 440 : 860}
             step={2}
             value={value}
+            aria-valuetext={`${Math.round(value)} pixels`}
             onChange={(e) => onChange(Number(e.target.value))}
           />
         </label>
@@ -140,18 +144,18 @@ export function ShapeControls({
       {hasFixedRadius(shape) ? (
         <p className="control-note">
           This shape sets its corner radius.{" "}
-          <button
+          <GlassButton
             type="button"
             className="text-button"
             onClick={() => setShape("custom")}
           >
             Customize corners
-          </button>
+          </GlassButton>
         </p>
       ) : (
         <label className="slider-row" htmlFor="setting-corner-radius">
           <span>Corner radius</span>
-          <output htmlFor="setting-corner-radius">
+          <output aria-hidden="true" htmlFor="setting-corner-radius">
             {state.settings.radius} px
           </output>
           <input
@@ -161,6 +165,7 @@ export function ShapeControls({
             max={240}
             step={1}
             value={state.settings.radius}
+            aria-valuetext={`${state.settings.radius} pixels`}
             onChange={(e) => {
               const radius = Number(e.target.value);
               setState((s) => ({
