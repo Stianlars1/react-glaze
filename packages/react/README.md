@@ -2,7 +2,19 @@
 
 [Website](https://react-glaze.app/) · [Components](https://react-glaze.app/components) · [Liquid Glass editor](https://react-glaze.app/components?component=glass) · [Showcase](https://react-glaze.app/showcase) · [npm](https://www.npmjs.com/package/react-glaze)
 
-Composable liquid glass for React 19 / Next.js, licensed under [MIT](LICENSE). LiquidGlass wraps ordinary content; LiquidGlassActions and LiquidGlassMenu provide native morphing controls; LiquidGlassGroup and LiquidGlassSurface expose the shared material/motion foundation. This is an experimental library. The rounded surface is new; the optical lens, physical material values and studio lighting derive from the pinned Drawn To reference. See [third-party notices](THIRD-PARTY-NOTICES.md).
+An open-source React 19 component library for liquid glass: a configurable wrapper, morphing menus, spring-driven actions and composable surfaces. Keep native content and your own CSS, and tune the material and motion.
+
+| Component | Use it for |
+| --- | --- |
+| `LiquidGlass` | Wrap existing buttons, cards and other native content in configurable glass |
+| `LiquidGlassActions` | Open separate action buttons in a row, column or fan |
+| `LiquidGlassMenu` | Morph a trigger into a menu panel |
+| `LiquidGlassGroup` | Coordinate the shared glass and motion of custom surfaces |
+| `LiquidGlassSurface` | Bind native content to a surface inside a group |
+
+Start with the three ready-made components, or compose your own interactions with the group and surface primitives. All five exports come from `react-glaze`.
+
+Licensed under [MIT](LICENSE). This is an experimental library for React 19 and Next.js. Desktop Chrome, Firefox and Safari are the targets; iPhone Safari is experimental. The optical lens, physical material values and studio lighting derive from the pinned Drawn To reference. See [third-party notices](THIRD-PARTY-NOTICES.md).
 
 ## Install and wrap
 
@@ -40,6 +52,8 @@ The background is ordinary page HTML. The component chooses the nearest ancestor
 
 ## Morph components
 
+The Components editor includes animation playback: pause, play, replay and scrub the actual spring animation, then tune the material on the held frame. Menu and group refs expose the same playback methods for your own tooling.
+
 ```tsx
 'use client';
 import { LiquidGlassActions } from 'react-glaze';
@@ -65,6 +79,8 @@ For custom interactions, `LiquidGlassGroup` takes explicit dimensions and up to 
 [Complete morph API, defaults, examples and limits](https://github.com/Stianlars1/react-glaze/blob/main/docs/components.md) · [Interactive guide](https://react-glaze.app/components)
 
 ## Component contract
+
+The options below apply to the original `LiquidGlass` wrapper. Use the [morph component guide](https://github.com/Stianlars1/react-glaze/blob/main/docs/components.md) for the menu, group and surface APIs.
 
 - `as`: `div` (default), `button`, `a`, `span`, `section`, `article`. Native attributes/events and typed DOM refs are forwarded. Buttons default to `type="button"`; explicitly use `type="submit"` for form submission. Links use normal `href`.
 - `enabled`: show/hide glass while retaining native children and interaction. It is independent of the native `disabled` prop. Use `disabled` on a button when it should not be clickable.

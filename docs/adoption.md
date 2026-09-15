@@ -10,7 +10,7 @@ npm install react-glaze
 
 For a local build before publishing:
 
-From the Liquid workspace, run:
+From the React Glaze workspace, run:
 
 ```sh
 pnpm pack:local
@@ -19,7 +19,7 @@ pnpm pack:local
 The command builds the package and prints a new archive path under `work/package-packs/`. Each run gets a separate directory. In your own React 19 or Next.js application:
 
 ```sh
-npm install /absolute/path/to/react-glaze-0.2.0.tgz
+npm install /absolute/path/to/react-glaze-0.2.1.tgz
 ```
 
 The installed library must be a real package directory, not a workspace symlink. Do not import from this workspace's source or copy its engine into the application. For a new archive with the same local version, install its new absolute path and restart the consuming app.
