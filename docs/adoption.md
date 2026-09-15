@@ -30,6 +30,8 @@ Use `LiquidGlass` to wrap existing content, `LiquidGlassActions` for separate ac
 
 ## Start with ordinary HTML and CSS
 
+The following examples cover the `LiquidGlass` wrapper. For action menus or custom groups, use the [component guide](components.md) alongside this introduction; those components expose their own geometry, motion and playback contracts.
+
 In a Next.js App Router page, a server component can render the library's client boundary directly:
 
 ```tsx
@@ -110,7 +112,7 @@ Updates remain asynchronous. A large capture root costs more than a small one, m
 
 ## Failure and lifecycle behavior
 
-Native HTML is server-rendered before the optical engine loads. `onReady` reports optical readiness, `onError` reports capture/render errors, and `onMetrics` provides throttled local counters. Errors hide the optical layer; original content remains. A successful refresh or WebGL context restoration can make it ready again.
+Native HTML is server-rendered before the optical engine loads. For `LiquidGlass`, `onReady` reports optical readiness, `onError` reports capture/render errors, and `onMetrics` provides throttled local counters. Errors hide the optical layer; original content remains. A successful refresh or WebGL context restoration can make it ready again. Morph groups have their own [lifecycle and playback callbacks](components.md); `onMetrics` belongs to the original wrapper.
 
 Hidden, offscreen and disabled surfaces pause. Final unmount releases observers, queues, source canvases, textures and the shared renderer. No idle animation loop is required. Data saving and reduced motion have their documented effects in the [package contract](../packages/react/README.md).
 
