@@ -90,7 +90,7 @@
     flex-direction: column;
     gap: var(--space-4);
   }
-  .playground-shell .workspace-intro h1 {
+  .playground-shell .workspace-intro :is(h1, h2) {
     font-size: 1.65rem;
   }
   .playground-shell .workspace-intro p {

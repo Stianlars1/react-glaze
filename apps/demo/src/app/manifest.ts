@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     id: "/",
     name: SITE_NAME,
     short_name: SITE_NAME,
-    description: "Liquid glass for React. Explore the playground and showcase.",
+    description: "Liquid glass for React. Explore components and showcase.",
     lang: "en",
     start_url: "/",
     scope: "/",

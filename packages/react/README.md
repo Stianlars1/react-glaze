@@ -1,8 +1,8 @@
 [![React Glaze - Liquid glass for React](https://react-glaze.app/brand/readme-banner.png)](https://react-glaze.app/)
 
-[Website](https://react-glaze.app/) · [Playground](https://react-glaze.app/playground) · [Showcase](https://react-glaze.app/showcase) · [npm](https://www.npmjs.com/package/react-glaze)
+[Website](https://react-glaze.app/) · [Components](https://react-glaze.app/components) · [Liquid Glass editor](https://react-glaze.app/components?component=glass) · [Showcase](https://react-glaze.app/showcase) · [npm](https://www.npmjs.com/package/react-glaze)
 
-One configurable component for React 19 / Next.js, licensed under [MIT](LICENSE). This is an experimental library. The rounded surface is new; the optical lens, physical material values and studio lighting derive from the pinned Drawn To reference. See [third-party notices](THIRD-PARTY-NOTICES.md).
+Composable liquid glass for React 19 / Next.js, licensed under [MIT](LICENSE). LiquidGlass wraps ordinary content; LiquidGlassActions and LiquidGlassMenu provide native morphing controls; LiquidGlassGroup and LiquidGlassSurface expose the shared material/motion foundation. This is an experimental library. The rounded surface is new; the optical lens, physical material values and studio lighting derive from the pinned Drawn To reference. See [third-party notices](THIRD-PARTY-NOTICES.md).
 
 ## Install and wrap
 
@@ -37,6 +37,32 @@ In a Next.js App Router application, a server component can render `LiquidGlass`
 The default wrapper follows normal `div` flow. It adds no width, height, padding, flex alignment, typography or color reset. Its essential styles establish local stacking; a low-specificity stylesheet supplies default positioning and corners. Your ordinary CSS selectors and inline styles can override the shape defaults. `className` and `style` belong to the caller; `width` and `height` remain optional conveniences. Native buttons and links retain their browser styling unless you style them explicitly.
 
 The background is ordinary page HTML. The component chooses the nearest ancestor with an opaque background color, or `document.body`; callers do not provide an image/source prop. The library combines a DOM snapshot adapter based on pinned html-to-image 1.11.13 helpers with an automatic native-image path and a lazily imported Three.js renderer. Its owned clone adaptation preserves browser-selected responsive images. This does **not** establish arbitrary live-DOM compatibility.
+
+## Morph components
+
+```tsx
+'use client';
+import { LiquidGlassActions } from 'react-glaze';
+
+export function DocumentActions() {
+  return <LiquidGlassActions
+    label="Document actions"
+    items={[
+      { id: 'save', label: 'Save', onSelect: () => console.log('Save') },
+      { id: 'share', label: 'Share', onSelect: () => console.log('Share') },
+    ]}
+    appearance="labels" layout="fan" direction="right"
+    distance={-40} actionSize={56}
+    motion={{ duration: 500, bounce: 0.5 }} refraction={1.5}
+  />;
+}
+```
+
+Use `LiquidGlassMenu` for a single trigger-to-panel morph. Menus have at most six items, native keyboard/dismissal behavior, controlled or local open state, disabled actions and viewport fitting. They render in place and follow ancestor clipping/stacking. Duration includes settling; signed distance moves the whole action group without compressing the arc. Content stays native and sharp. `externalControls` can associate one bounded external controls element so its pointer and focus events do not dismiss the menu. `boundary` optionally fits a menu within a stage instead of the visual viewport; scrolling a shared stage and trigger then keeps the same fitting geometry. Paused playback and a settled endpoint retain their sampled time across hidden/offscreen suspension, while unpaused motion completes before resources are released.
+
+For custom interactions, `LiquidGlassGroup` takes explicit dimensions and up to eight identified `{ id, x, y, width, height, radius? }` geometries, with center coordinates in CSS pixels. `LiquidGlassSurface` binds native content and hit regions to the current geometry. Group options include `material`, `motion`, `connection`, `refraction`, `reducedMotion`, `backdrop`, `onReady`, `onError` and `onPlaybackUpdate`. A `GlassGroupHandle` ref exposes `element`, `refresh()`, `pulse()`, `pause()`, `play()`, `seek()` and `replay()`; menu refs use `GlassMenuHandle` with the playback methods and root element. Playback inspection samples the actual spring and pulse, clamps to the current duration and remains a safe no-op until an authored transition exists. Native fallback geometry remains inspectable while loading or when graphics are unavailable. Reduced motion continues to snap.
+
+[Complete morph API, defaults, examples and limits](https://github.com/Stianlars1/react-glaze/blob/main/docs/components.md) · [Interactive guide](https://react-glaze.app/components)
 
 ## Component contract
 
@@ -187,7 +213,7 @@ No physical iPhone/Android or Windows Edge support guarantee is made by this ver
 }
 ```
 
-Material presets remain adjustable. `shape` is the outline convenience; `preset` is the material starting point. The playground retains the selected shape when changing material and provides **Match Optical Type** to restore the original material, lens, artwork and proportions together. Manually editing corners shows **Custom corners**. JSX/JSON export uses the same typed prop builder as the live preview and excludes locked radius/height props.
+Material presets remain adjustable. `shape` is the outline convenience; `preset` is the material starting point. The Liquid Glass editor at `/components?component=glass` retains the selected shape when changing material and provides **Match Optical Type** to restore the original material, lens, artwork and proportions together. Manually editing corners shows **Custom corners**. JSX/JSON export uses the same typed prop builder as the live preview and excludes locked radius/height props. `/playground` is a compatibility redirect.
 
 Shape defaults ship as one deduplicated React 19 style resource; consumers do not need a separate stylesheet import. Class/style changes, ancestor theme classes, stylesheet text changes, resize and CSS radius transitions/animations refresh the contour. No idle polling or DOM measurement probe is added. Direct CSSOM insertRule mutations and JavaScript Web Animations started without a DOM/CSS animation event are not automatically tracked by this version. Geometry animation may allocate changing meshes; bounded memory is not a promise of arbitrary animation performance.
 

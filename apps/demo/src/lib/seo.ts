@@ -5,19 +5,18 @@ export const SITE_NAME = "React Glaze";
 export const REPOSITORY_URL = "https://github.com/Stianlars1/react-glaze";
 export const PACKAGE_URL = "https://www.npmjs.com/package/react-glaze";
 
-export const PUBLIC_ROUTES = ["/", "/playground", "/showcase"] as const;
+export const PUBLIC_ROUTES = ["/", "/showcase", "/components"] as const;
 type PublicRoute = (typeof PUBLIC_ROUTES)[number];
 
 const pages = {
   "/": {
     title: "React Glaze - Liquid glass for React",
     description:
-      "A configurable liquid glass wrapper for React 19 and Next.js. Keep your content and CSS, tune the material in the playground, and explore a working showcase.",
+      "Liquid glass for React 19 and Next.js. Build with a configurable wrapper, morphing menus, spring-driven actions and composable surfaces.",
   },
-  "/playground": {
-    title: "Playground",
-    description:
-      "Tune React Glaze materials, shapes and rim lighting over different backgrounds. Try your own image, save a configuration, and copy the React code.",
+  "/components": {
+    title: "Components",
+    description: "Explore React Glaze split actions, morphing menus and the Liquid Glass editor. Customize material, shape and rim lighting, then copy the React code.",
   },
   "/showcase": {
     title: "Showcase - Roam",

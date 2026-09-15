@@ -15,7 +15,7 @@ type DemoEvent =
   | { name: "playground_code_copied"; properties: { format: "jsx" | "json" } }
   | {
       name: "resource_link_clicked";
-      properties: { destination: "github" | "documentation" };
+      properties: { destination: "github" | "documentation" | "npm" };
     };
 
 export function trackDemoEvent(event: DemoEvent) {

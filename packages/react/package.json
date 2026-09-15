@@ -1,9 +1,9 @@
 {
   "name": "react-glaze",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "type": "module",
   "license": "MIT",
-  "description": "Liquid glass for React. A configurable wrapper with automatic background refraction and optional pointer-driven rim lighting.",
+  "description": "Liquid glass for React. Composable glass surfaces, morphing menus and spring-driven action groups.",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
