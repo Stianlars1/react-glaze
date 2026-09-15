@@ -1,8 +1,6 @@
 import { ControlMaterial } from "./ControlMaterial";
 import { CopyButton } from "./CopyButton";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { BrandIcon } from "@/components/brand/BrandIcon";
 import { PRESETS } from "react-glaze";
 import type { GlassPreset } from "react-glaze";
 import { backgrounds, initialState, shareableState } from "./config";
@@ -16,7 +14,7 @@ import { useCopyFeedback } from "./useCopyFeedback";
 import { GlassPreview } from "./GlassPreview";
 import { CodePanel } from "./CodePanel";
 
-export function App() {
+export function App({ active }: { active: boolean }) {
   const [state, setState] = useState(readPlaygroundState);
   const [previewRevision, setPreviewRevision] = useState(0);
   const custom = useCustomBackground();
@@ -46,44 +44,33 @@ export function App() {
       },
     }));
   const shareUrl = new URL(location.href);
+  shareUrl.searchParams.set("component", "glass");
   shareUrl.searchParams.set("config", JSON.stringify(shareableState(state)));
   const shareHref = shareUrl.href;
   useEffect(() => {
-    history.replaceState(null, "", shareHref);
-  }, [shareHref]);
+    if (!active || location.href === shareHref) return;
+    history.replaceState(history.state, "", shareHref);
+  }, [active, shareHref]);
   const shuffle = () => {
     const choices = backgrounds.filter((b) => b.id !== state.background);
     const value = new Uint32Array(1);
     crypto.getRandomValues(value);
     chooseBackground(choices[value[0] % choices.length].id);
   };
+
+  if (!active) return null;
+
   return (
     <ControlMaterial>
-      <div className="playground-shell">
-        <a className="skip-link" href="#playground">
-          Skip to playground
-        </a>
-        <header className="app-header">
-          <Link
-            className="playground-brand"
-            href="/"
-            aria-label="React Glaze home"
-          >
-            <BrandIcon />
-            React Glaze
-          </Link>
-          <nav aria-label="Main navigation">
-            <Link href="/">Home</Link>
-            <a href="#playground" aria-current="page">
-              Playground
-            </a>
-            <Link href="/showcase">Showcase</Link>
-          </nav>
-        </header>
-        <main id="playground" className="workspace" tabIndex={-1}>
+      <section
+        id="playground"
+        className="playground-shell components-editor"
+        aria-labelledby="glass-editor-title"
+      >
+        <div className="workspace" tabIndex={-1}>
           <div className="workspace-intro">
             <div>
-              <h1>A different feeling. Your own.</h1>
+              <h2 id="glass-editor-title">Liquid Glass editor</h2>
               <p>Choose a scene. Shape the glass. Take it with you.</p>
             </div>
             <div className="workspace-actions">
@@ -162,25 +149,8 @@ export function App() {
             <CodePanel state={state} />
             <SavedConfiguration state={state} onLoad={replaceState} />
           </div>
-        </main>
-        <footer className="workspace-footer">
-          <span>
-            An open-source project by{" "}
-            <a href="https://stianlarsen.com/">Stian Larsen</a>.
-          </span>
-          <div>
-            <a href="/research.html" target="_blank" rel="noopener">
-              Research notes
-            </a>
-            <a href="/quality.html" target="_blank" rel="noopener">
-              Before / after
-            </a>
-            <a href="https://github.com/Stianlars1/react-glaze#readme">
-              Documentation
-            </a>
-          </div>
-        </footer>
-      </div>
+        </div>
+      </section>
     </ControlMaterial>
   );
 }

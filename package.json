@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "pack:local": "node scripts/pack-local.mjs",
-    "build": "pnpm --filter react-glaze build && pnpm --filter demo build",
+    "build": "pnpm --filter demo build",
     "dev": "pnpm --filter demo dev",
     "start": "pnpm --filter demo start",
     "test": "pnpm --filter react-glaze build && node --test packages/react/tests/*.test.mjs && pnpm --filter react-glaze test:types",

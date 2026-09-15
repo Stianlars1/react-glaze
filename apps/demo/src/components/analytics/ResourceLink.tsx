@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 import { trackDemoEvent } from "@/lib/analytics";
 
 type ResourceLinkProps = ComponentProps<"a"> & {
-  destination: "github" | "documentation";
+  destination: "github" | "documentation" | "npm";
 };
 
 export function ResourceLink({ destination, onClick, ...props }: ResourceLinkProps) {

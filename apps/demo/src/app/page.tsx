@@ -3,22 +3,21 @@ import { redirect } from "next/navigation";
 import { MaterialStage } from "@/components/landing/MaterialStage";
 import { InstallCommand } from "@/components/landing/InstallCommand";
 import { BrandIcon } from "@/components/brand/BrandIcon";
-import { pageMetadata } from "@/lib/seo";
+import { PACKAGE_URL, pageMetadata, REPOSITORY_URL } from "@/lib/seo";
 import { ResourceLink } from "@/components/analytics/ResourceLink";
+import { redirectToComponents, type RouteSearchParams } from "@/lib/components-navigation";
 
 export const metadata = pageMetadata("/");
 
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ config?: string | string[] }>;
+  searchParams: Promise<RouteSearchParams>;
 }) {
-  const { config } = await searchParams;
+  const query = await searchParams;
+  const { config } = query;
   if (config !== undefined) {
-    const query = new URLSearchParams({
-      config: Array.isArray(config) ? config[0] : config,
-    });
-    redirect(`/playground?${query}`);
+    redirect(redirectToComponents(query));
   }
 
   return (
@@ -28,9 +27,14 @@ export default async function Home({
           <BrandIcon />
           <span>React Glaze</span>
         </Link>
-        <ResourceLink destination="github" className="landing-github" href="https://github.com/Stianlars1/react-glaze">
-          GitHub
-        </ResourceLink>
+        <nav className="landing-resources" aria-label="Project resources">
+          <ResourceLink destination="github" className="landing-resource-link" href={REPOSITORY_URL}>
+            GitHub
+          </ResourceLink>
+          <ResourceLink destination="npm" className="landing-resource-link" href={PACKAGE_URL}>
+            npm
+          </ResourceLink>
+        </nav>
       </header>
 
       <main className="landing-main">
@@ -39,15 +43,15 @@ export default async function Home({
             <h1>Liquid glass for React.</h1>
             <p className="landing-description">
               Wrap a button or a card.<br />
-              Keep your content and your own CSS.
+              Compose a menu. Keep your own CSS.
             </p>
           </div>
           <div className="landing-entry-points">
             <InstallCommand />
             <nav className="landing-actions" aria-label="Explore React Glaze">
-              <Link href="/playground" className="landing-route-link">
-                <span>Playground</span>
-                <span className="landing-route-detail">Tune the glass</span>
+              <Link href="/components" className="landing-route-link">
+                <span>Components</span>
+                <span className="landing-route-detail">Explore and customize</span>
               </Link>
               <Link href="/showcase" className="landing-route-link">
                 <span>Showcase</span>

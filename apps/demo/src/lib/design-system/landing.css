@@ -49,7 +49,12 @@
   height: calc(var(--space-5) + var(--space-4));
   flex: none;
 }
-.landing-github {
+.landing-resources {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.landing-resource-link {
   display: inline-flex;
   align-items: center;
   gap: var(--space-4);
@@ -218,7 +223,7 @@
 .landing-footer > div { display: flex; align-items: center; gap: var(--space-3); }
 @media (hover: hover) and (pointer: fine) {
   .landing-route-link:hover > span:first-child { transform: translateX(calc(var(--enter-distance) / 6)); text-decoration-color: currentColor; }
-  .landing-github:hover { text-decoration: underline; }
+  .landing-resource-link:hover { text-decoration: underline; }
   .install-command-button:hover { background: hsl(var(--accent)); }
   .landing-scene-button:hover:not([aria-pressed="true"]) { background: hsl(var(--accent)); color: hsl(var(--foreground)); }
 }

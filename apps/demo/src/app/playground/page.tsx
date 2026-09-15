@@ -1,11 +1,10 @@
-import type { ResolvingMetadata } from "next";
-import { PlaygroundLoader } from "@/components/playground/PlaygroundLoader";
-import { pageMetadata } from "@/lib/seo";
+import { redirect } from "next/navigation";
+import { redirectToComponents, type RouteSearchParams } from "@/lib/components-navigation";
 
-export async function generateMetadata(_props: unknown, parent: ResolvingMetadata) {
-  return pageMetadata("/playground", await parent);
-}
-
-export default function PlaygroundPage() {
-  return <PlaygroundLoader />;
+export default async function PlaygroundPage({
+  searchParams,
+}: {
+  searchParams: Promise<RouteSearchParams>;
+}) {
+  redirect(redirectToComponents(await searchParams));
 }

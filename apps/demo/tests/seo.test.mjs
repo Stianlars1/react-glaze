@@ -3,14 +3,14 @@ import test from "node:test";
 import { pageMetadata, serializeJsonLd, siteMetadata, siteStructuredData } from "../src/lib/seo.ts";
 import sitemap from "../src/app/sitemap.ts";
 
-test("route canonicals and the sitemap agree on the three query-free production URLs", () => {
+test("route canonicals and the sitemap agree on all query-free production URLs", () => {
   assert.equal(siteMetadata.alternates, undefined);
-  const routes = ["/", "/playground", "/showcase"];
+  const routes = ["/", "/showcase", "/components"];
   const urls = routes.map((route) => pageMetadata(route).alternates.canonical);
   assert.deepEqual(urls, [
     "https://react-glaze.app",
-    "https://react-glaze.app/playground",
     "https://react-glaze.app/showcase",
+    "https://react-glaze.app/components",
   ]);
   assert.deepEqual(sitemap().map(({ url }) => url), urls);
   for (const route of routes) {
@@ -19,8 +19,8 @@ test("route canonicals and the sitemap agree on the three query-free production 
 });
 
 test("child titles receive one brand suffix and identify the relevant demo", () => {
-  assert.equal(pageMetadata("/playground").title, "Playground");
-  assert.equal(pageMetadata("/playground").openGraph.title, "Playground | React Glaze");
+  assert.equal(pageMetadata("/components").title, "Components");
+  assert.equal(pageMetadata("/components").openGraph.title, "Components | React Glaze");
   assert.equal(pageMetadata("/showcase").title, "Showcase - Roam");
   assert.equal(pageMetadata("/showcase").twitter.title, "Showcase - Roam | React Glaze");
 });
@@ -36,7 +36,7 @@ test("child metadata preserves native file image URLs, dimensions and alt text f
       images: [{ url: "https://react-glaze.app/twitter-image.png?build-hash", alt: "React Glaze" }],
     },
   };
-  for (const route of ["/playground", "/showcase"]) {
+  for (const route of ["/showcase", "/components"]) {
     const metadata = pageMetadata(route, parent);
     assert.deepEqual(metadata.openGraph.images, parent.openGraph.images);
     assert.deepEqual(metadata.twitter.images, parent.twitter.images);

@@ -9,7 +9,7 @@
   gap: var(--space-5);
   padding-block: var(--space-5) var(--space-6);
 }
-.playground-shell .workspace-intro h1 {
+.playground-shell .workspace-intro :is(h1, h2) {
   font-size: clamp(1.55rem, 2.3vw, 2.1rem);
   font-weight: 500;
   line-height: 1.18;

@@ -1,4 +1,4 @@
-# Use LiquidGlass in another application
+# Use React Glaze in another application
 
 React Glaze is an experimental React 19 library licensed under MIT. The owner-selected product name is React Glaze and its npm package name is `react-glaze`. No background image prop, global provider or CSS import is required. The [package contract](../packages/react/README.md) documents the desktop Chrome/Firefox/Safari targets and experimental iPhone scope.
 
@@ -19,10 +19,14 @@ pnpm pack:local
 The command builds the package and prints a new archive path under `work/package-packs/`. Each run gets a separate directory. In your own React 19 or Next.js application:
 
 ```sh
-npm install /absolute/path/to/react-glaze-0.1.0.tgz
+npm install /absolute/path/to/react-glaze-0.2.0.tgz
 ```
 
 The installed library must be a real package directory, not a workspace symlink. Do not import from this workspace's source or copy its engine into the application. For a new archive with the same local version, install its new absolute path and restart the consuming app.
+
+## Choose a component
+
+Use `LiquidGlass` to wrap existing content, `LiquidGlassActions` for separate action buttons, or `LiquidGlassMenu` for a morphing panel. Compose custom geometry with `LiquidGlassGroup` and `LiquidGlassSurface`. The [morph component guide](components.md) covers their complete API, keyboard behavior, fitting, motion and background limits.
 
 ## Start with ordinary HTML and CSS
 
@@ -116,4 +120,4 @@ The tested showcase covers native page scrolling, fixed navigation, image change
 
 Video/canvas frames, foreign iframes, cross-origin images without CORS, complex masks/blending, nested scrolling, transformed ancestors, closed shadow DOM, CSSOM/WAAPI-only changes and recursive glass still need separate work. Changing bytes at an unchanged image URL is not automatically observable. Root selection occurs at mount; reparenting requires a remount.
 
-The runnable examples are the actual [showcase](../apps/demo/README.md) and [playground](../README.md). Public publication and deployment are separate from successful local use.
+The runnable examples are the actual [showcase](../apps/demo/README.md), [components guide](../README.md) and Liquid Glass editor at `/components?component=glass`. Public publication and deployment are separate from successful local use.
