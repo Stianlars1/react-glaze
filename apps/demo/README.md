@@ -1,6 +1,6 @@
 # React Glaze demo
 
-One Next.js application for React Glaze, the experimental React 19 liquid glass wrapper. The landing pairs a quiet introduction with three original material scenes and a real draggable glass preview. Click the glass to switch between clear and frosted.
+One Next.js application for React Glaze, the experimental React 19 component library for liquid glass, morphing menus and composable surfaces. The landing pairs a quiet introduction with three original material scenes and a real draggable glass preview. Click the glass to switch between clear and frosted.
 
 ## Run from the workspace root
 
@@ -26,6 +26,8 @@ The app consumes `react-glaze` through `workspace:*`, using the library's built 
 Use `pnpm pack:local` and an independently installed tarball consumer to verify the distributable package separately. The workspace demo does not establish that an archive contains everything an external application needs. See the [release procedure](../../docs/releasing.md).
 
 The Liquid Glass editor retains the owner's exact initial/reset configuration. `/components` selects split actions by default; `component=actions|menu|glass` is addressable, and a `config` query without an explicit valid component selects the editor. Explicit `config` query parameters win over a manually saved local configuration. The storage key remains `react-glaze:playground:config:v1`. Save is manual, Reset does not overwrite the saved copy, Delete saved leaves the current preview intact, and uploaded image bytes are not stored. Storage belongs to an origin, so changing host or port does not transfer previous settings. Old `/?config=...` and `/playground` links redirect to `/components?component=glass` with their query values preserved.
+
+The two menu tabs expose the library's actual components and spring playback. Expand Animation playback to pause, play, replay or scrub the animation. Connection reach and refraction can be tuned while a menu is open or a frame is held. The editor associates its controls with the menu and uses its preview stage as the fitting boundary, so scrolling to a slider preserves the inspected state. The [component guide](../../docs/components.md) documents these APIs for consumers.
 
 Roam retains `liquid-showcase-trip-v1` for its local trip state. Photographs and fonts retain their [source attribution](ASSETS.md).
 
